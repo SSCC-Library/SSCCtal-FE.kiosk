@@ -1,0 +1,25 @@
+.message {
+	position: relative;
+	top: 370px;
+	left: 50%;
+	transform: translateX(-50%);
+	font-size: 14px;
+	padding: 8px 12px;
+	border-radius: 6px;
+	text-align: center;
+}
+
+.message.success {
+	color: green;
+	background-color: #e6ffe6;
+}
+
+.message.error {
+	color: red;
+	background-color: #ffe6e6;
+}
+
+.message.info {
+	color: black;
+	background-color: #f5f5f5;
+}
