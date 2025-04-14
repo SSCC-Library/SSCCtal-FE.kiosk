@@ -32,7 +32,3 @@ Thumbs.db
 coverage/
 *.local
 *.cache/
-
-.prettierrc
-eslint.config.js
-.eslintrc.js
