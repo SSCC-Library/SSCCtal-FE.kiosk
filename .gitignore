@@ -33,6 +33,6 @@ coverage/
 *.local
 *.cache/
 
-./prettierrc
+.prettierrc
 eslint.config.js
 .eslintrc.js
