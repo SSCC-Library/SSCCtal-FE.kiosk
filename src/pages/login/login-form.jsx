@@ -5,14 +5,15 @@ import InputField from '@/components/input-field';
 import Button from '@/components/button';
 import Message from '../../components/message';
 import { use_login_limiter } from '@/hooks/use-login-limiter';
-import './login-form.css';
+import './login.css';
 
 function LoginForm() {
 	const [user_id, set_user_id] = useState('');
 	const [pwd, set_pwd] = useState('');
 	const [message, set_message] = useState('');
 	const [error, set_error] = useState('');
-	const { is_locked, check, add_attempt, lock_temporarily, remaining_time } = use_login_limiter();
+	const { is_locked, check, add_attempt, lock_temporarily, remaining_time, attempts } =
+		use_login_limiter();
 
 	const handle_submit = async (e) => {
 		e.preventDefault();
@@ -28,14 +29,13 @@ function LoginForm() {
 			return;
 		}
 
-		add_attempt(); // 시도 카운트 증가
-
 		try {
 			const res = await loginRequest(user_id, pwd);
 			const match = res.match(/sToken=([^&]+)&/);
 
 			if (!match) {
-				set_error(ERROR_MESSAGES.invalid_login);
+				set_error(ERROR_MESSAGES.invalid_login.replace('{count}', 3 - attempts));
+				add_attempt(); // 시도 카운트 증가
 				return;
 			}
 
@@ -55,10 +55,7 @@ function LoginForm() {
 	};
 
 	return (
-		<form className="login-container" onSubmit={handle_submit}>
-			<div className="title">SCLibrary</div>
-
-			<div className="label">유세인트 계정을 입력하세요</div>
+		<form onSubmit={handle_submit}>
 			<InputField
 				type="text"
 				value={user_id}
