@@ -1,5 +1,5 @@
 .login-button {
-	position: relative;
+	position: absolute;
 	top: 310px;
 	left: 50%;
 	transform: translateX(-50%);
@@ -7,6 +7,7 @@
 	height: 45px;
 	background: #4969e0;
 	border-radius: 10px;
+
 	color: white;
 	font-weight: 500;
 	font-size: 14px;
@@ -14,6 +15,42 @@
 }
 
 .login-button.disabled {
-	background-color: ##e5bcbc;
+	background-color: #e5bcbc;
 	cursor: not-allowed;
+}
+
+.rental-button {
+	position: absolute;
+	width: 97px;
+	height: 103px;
+	left: calc(50% - 97px / 2 - 61.5px);
+	top: calc(50% - 103px / 2 - 50.5px);
+	background: #ffffff;
+	border: 2px solid #d9d9d9;
+	border-radius: 10px;
+
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 24px;
+	color: #2e5bff;
+}
+
+.return-button {
+	position: absolute;
+	width: 97px;
+	height: 103px;
+	left: calc(50% - 97px / 2 + 61.5px);
+	top: calc(50% - 103px / 2 - 50.5px);
+	background: #ffffff;
+	border: 2px solid #d9d9d9;
+	border-radius: 10px;
+
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 20px;
+	line-height: 24px;
+	color: #2e5bff;
 }
