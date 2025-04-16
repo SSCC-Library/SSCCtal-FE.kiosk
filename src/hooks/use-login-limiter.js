@@ -12,7 +12,7 @@ export function use_login_limiter(limit = 3, duration = 60000) {
 
 		const elapsed = now - first_time;
 
-		if (elapsed < duration && attempts >= limit) {
+		if (elapsed < duration && attempts > limit - 1) {
 			return true;
 		}
 
@@ -50,5 +50,13 @@ export function use_login_limiter(limit = 3, duration = 60000) {
 		}, duration);
 	};
 
-	return { is_locked, check, add_attempt, lock_temporarily, remaining_time, attempts };
+	return {
+		is_locked,
+		check,
+		add_attempt,
+		lock_temporarily,
+		remaining_time,
+		attempts,
+		set_attempts,
+	};
 }

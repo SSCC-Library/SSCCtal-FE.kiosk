@@ -12,8 +12,15 @@ function LoginForm() {
 	const [pwd, set_pwd] = useState('');
 	const [message, set_message] = useState('');
 	const [error, set_error] = useState('');
-	const { is_locked, check, add_attempt, lock_temporarily, remaining_time, attempts } =
-		use_login_limiter();
+	const {
+		is_locked,
+		check,
+		add_attempt,
+		lock_temporarily,
+		remaining_time,
+		attempts,
+		set_attempts,
+	} = use_login_limiter();
 
 	const handle_submit = async (e) => {
 		e.preventDefault();
@@ -24,22 +31,28 @@ function LoginForm() {
 			return;
 		}
 
-		if (check()) {
-			lock_temporarily();
-			return;
-		}
-
 		try {
 			const res = await loginRequest(user_id, pwd);
 			const match = res.match(/sToken=([^&]+)&/);
 
 			if (!match) {
-				set_error(ERROR_MESSAGES.invalid_login.replace('{count}', 3 - attempts));
-				add_attempt(); // 시도 카운트 증가
+				add_attempt();
+
+				if (check()) {
+					lock_temporarily();
+					return;
+				}
+				set_error(
+					ERROR_MESSAGES.invalid_login.replace(
+						'{count}',
+						3 - attempts
+					)
+				);
 				return;
 			}
 
 			set_message(SUCCESS_MESSAGES.login_success);
+			set_attempts(0);
 			console.log('sToken:', match[1]);
 		} catch (err) {
 			set_error(`${ERROR_MESSAGES.login_fail}: ${err.message}`);
@@ -49,7 +62,10 @@ function LoginForm() {
 	const render_lock_message = () => {
 		if (!is_locked || !remaining_time) return null;
 
-		const msg = INFO_MESSAGES.too_many_attempts.replace('{time}', remaining_time.toString());
+		const msg = INFO_MESSAGES.too_many_attempts.replace(
+			'{time}',
+			remaining_time.toString()
+		);
 
 		return <Message type="info" text={msg} />;
 	};
