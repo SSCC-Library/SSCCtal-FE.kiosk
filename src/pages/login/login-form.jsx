@@ -6,8 +6,10 @@ import Button from '@/components/button';
 import Message from '../../components/message';
 import { use_login_limiter } from '@/hooks/use-login-limiter';
 import './login.css';
+import { useNavigate } from 'react-router-dom';
 
 function LoginForm() {
+	const navigate = useNavigate();
 	const [user_id, set_user_id] = useState('');
 	const [pwd, set_pwd] = useState('');
 	const [message, set_message] = useState('');
@@ -42,18 +44,15 @@ function LoginForm() {
 					lock_temporarily();
 					return;
 				}
-				set_error(
-					ERROR_MESSAGES.invalid_login.replace(
-						'{count}',
-						3 - attempts
-					)
-				);
+				set_error(ERROR_MESSAGES.invalid_login.replace('{count}', 3 - attempts));
 				return;
 			}
 
 			set_message(SUCCESS_MESSAGES.login_success);
 			set_attempts(0);
 			console.log('sToken:', match[1]);
+
+			navigate('/main');
 		} catch (err) {
 			set_error(`${ERROR_MESSAGES.login_fail}: ${err.message}`);
 		}
@@ -62,10 +61,7 @@ function LoginForm() {
 	const render_lock_message = () => {
 		if (!is_locked || !remaining_time) return null;
 
-		const msg = INFO_MESSAGES.too_many_attempts.replace(
-			'{time}',
-			remaining_time.toString()
-		);
+		const msg = INFO_MESSAGES.too_many_attempts.replace('{time}', remaining_time.toString());
 
 		return <Message type="info" text={msg} />;
 	};
