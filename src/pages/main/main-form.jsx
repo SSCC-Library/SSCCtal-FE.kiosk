@@ -9,13 +9,13 @@ function MainForm() {
 	return (
 		<div className="main-page">
 			<Button
-				onClick={() => navigate('/rental', { state: { mode: 'rental' } })}
+				onClick={() => navigate('/qrscan', { state: { mode: 'rental' } })}
 				class_name="rental-button"
 			>
 				대여
 			</Button>
 			<Button
-				onClick={() => navigate('/return', { state: { mode: 'return' } })}
+				onClick={() => navigate('/qrscan', { state: { mode: 'return' } })}
 				class_name="return-button"
 			>
 				반납
