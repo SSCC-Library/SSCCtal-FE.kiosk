@@ -1,5 +1,5 @@
 export const ERROR_MESSAGES = {
-	invalid_login: '학번 혹은 비밀번호를 잘못 입력하였습니다.',
+	invalid_login: '학번 혹은 비밀번호를 잘못 입력하였습니다. {count}번 남았습니다.',
 	login_fail: '로그인 요청 실패',
 };
 
