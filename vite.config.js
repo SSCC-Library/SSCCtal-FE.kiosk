@@ -12,7 +12,7 @@ export default defineConfig({
 	server: {
 		proxy: {
 			'/api/ssu': {
-				target: 'https://smartid.ssu.ac.kr', // 백엔드 주소
+				target: env.VITE_SSU_PROXY_TARGET,
 				changeOrigin: true,
 				secure: false,
 				rewrite: (path) => path.replace(/^\/api\/ssu/, '/Symtra_sso'),

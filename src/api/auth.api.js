@@ -1,4 +1,5 @@
 import axios from 'axios';
+const BASE_URL = import.meta.env.VITE_SSU_PROXY_URL;
 
 export const loginRequest = async (userId, pwd) => {
 	const params = new URLSearchParams();
@@ -7,7 +8,7 @@ export const loginRequest = async (userId, pwd) => {
 	params.append('userId', userId);
 	params.append('pwd', pwd);
 
-	const res = await axios.post('/api/ssu/smln_pcs.asp', params, {
+	const res = await axios.post(`${BASE_URL}/smln_pcs.asp`, params, {
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
