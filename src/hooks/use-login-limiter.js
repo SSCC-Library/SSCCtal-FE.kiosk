@@ -50,5 +50,5 @@ export function use_login_limiter(limit = 3, duration = 60000) {
 		}, duration);
 	};
 
-	return { is_locked, check, add_attempt, lock_temporarily, remaining_time };
+	return { is_locked, check, add_attempt, lock_temporarily, remaining_time, attempts };
 }
