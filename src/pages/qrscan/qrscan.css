@@ -1,0 +1,44 @@
+.qrscan-container {
+	position: relative;
+	top: 40px;
+	width: 400px;
+	height: 600px;
+	margin: 0 auto;
+	background: #fff;
+	border: 2px solid #2e5bff;
+	border-radius: 20px;
+	box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.qrscan-title {
+	position: absolute;
+	width: 300px;
+	height: 38px;
+	left: calc(50% - 200px / 2);
+	top: calc(50% - 38px / 2 - 160px);
+
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 32px;
+	line-height: 38px;
+
+	color: #003c9e;
+}
+
+.qrscan-label {
+	position: absolute;
+	width: 300px;
+	height: 17px;
+	left: calc(50% - 140px);
+	top: 230px;
+
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+
+	color: #000000;
+}
