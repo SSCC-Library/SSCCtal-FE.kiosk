@@ -14,6 +14,38 @@
 	border: none;
 }
 
+.main-button {
+	position: absolute;
+	top: 370px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 220px;
+	height: 45px;
+	background: #4969e0;
+	border-radius: 10px;
+
+	color: white;
+	font-weight: 500;
+	font-size: 14px;
+	border: none;
+}
+
+.picture-button {
+	position: absolute;
+	top: 310px;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 220px;
+	height: 45px;
+	background: #4969e0;
+	border-radius: 10px;
+
+	color: white;
+	font-weight: 500;
+	font-size: 14px;
+	border: none;
+}
+
 .login-button.disabled {
 	background-color: #e5bcbc;
 	cursor: not-allowed;
