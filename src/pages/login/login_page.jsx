@@ -1,4 +1,4 @@
-import LoginForm from './login-form';
+import LoginForm from './login_form';
 import './login.css';
 import { useEffect } from 'react';
 

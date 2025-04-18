@@ -1,4 +1,4 @@
-import QRForm from './qr-form';
+import QRForm from './qr_form';
 import './qrscan.css';
 
 function QRPage() {

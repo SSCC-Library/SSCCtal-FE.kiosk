@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
-import LoginPage from '@/pages/login/login-page';
-import MainPage from '@/pages/main/main-page';
-import QRPage from '@/pages/qrscan/qr-page';
+import LoginPage from '@/pages/login/login_page';
+import MainPage from '@/pages/main/main_page';
+import QRPage from '@/pages/qrscan/qr_page';
 
 function Main() {
 	return (
