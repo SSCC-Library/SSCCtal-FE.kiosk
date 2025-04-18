@@ -2,7 +2,7 @@ import React from 'react';
 import Button from '@/components/button';
 import './qrscan.css';
 import { useNavigate, useLocation } from 'react-router-dom';
-import VideoStream from '../../components/video-stream';
+import VideoStream from '../../components/video_stream';
 
 function QRForm() {
 	const navigate = useNavigate();

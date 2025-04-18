@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { loginRequest } from '@/api/auth-api';
+import { loginRequest } from '@/api/auth_api';
 import { SUCCESS_MESSAGES, ERROR_MESSAGES, INFO_MESSAGES } from '@/constants/messages';
-import InputField from '@/components/input-field';
+import InputField from '@/components/input_field';
 import Button from '@/components/button';
-import Message from '../../components/message';
-import { use_login_limiter } from '@/hooks/use-login-limiter';
+import Message from '@/components/message';
+import { use_login_limiter } from '@/hooks/use_login_limiter';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import { verifyUserBySchoolNumber } from '@/api/user-api';
+import { verifyUserBySchoolNumber } from '@/api/user_api';
 
 function LoginForm() {
 	const navigate = useNavigate();

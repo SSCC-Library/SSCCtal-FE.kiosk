@@ -1,4 +1,4 @@
-import './input-field.css';
+import './input_field.css';
 
 function InputField({ type = 'text', value, onChange, placeholder, class_name = '' }) {
 	return (

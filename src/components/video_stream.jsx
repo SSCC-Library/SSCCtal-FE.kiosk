@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import './video-stream.css';
+import './video_stream.css';
 
 const ESP_URL = import.meta.env.VITE_ESP_URL;
 
