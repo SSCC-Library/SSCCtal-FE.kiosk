@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { loginRequest } from '@/api/auth.api';
+import { loginRequest } from '@/api/auth-api';
 import { SUCCESS_MESSAGES, ERROR_MESSAGES, INFO_MESSAGES } from '@/constants/messages';
 import InputField from '@/components/input-field';
 import Button from '@/components/button';
@@ -7,6 +7,7 @@ import Message from '../../components/message';
 import { use_login_limiter } from '@/hooks/use-login-limiter';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
+import { verifyUserBySchoolNumber } from '@/api/user-api';
 
 function LoginForm() {
 	const navigate = useNavigate();
@@ -48,11 +49,21 @@ function LoginForm() {
 				return;
 			}
 
-			set_message(SUCCESS_MESSAGES.login_success);
 			set_attempts(0);
 			console.log('sToken:', match[1]);
 
-			navigate('/main');
+			try {
+				const user = await verifyUserBySchoolNumber(user_id);
+				console.log('유저 확인됨:', user);
+				set_message(SUCCESS_MESSAGES.login_success);
+				navigate('/main', { state: { user } });
+			} catch (err) {
+				if (err.response?.status === 404) {
+					set_error(ERROR_MESSAGES.user_not_found || '등록되지 않은 유저입니다');
+				} else {
+					set_error(`${ERROR_MESSAGES.login_fail}: ${err.message}`);
+				}
+			}
 		} catch (err) {
 			set_error(`${ERROR_MESSAGES.login_fail}: ${err.message}`);
 		}
