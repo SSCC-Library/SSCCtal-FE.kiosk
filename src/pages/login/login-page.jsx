@@ -1,7 +1,13 @@
 import LoginForm from './login-form';
 import './login.css';
+import { useEffect } from 'react';
 
 function LoginPage() {
+	useEffect(() => {
+		localStorage.removeItem('user');
+		console.log('로그아웃 처리');
+	}, []);
+
 	return (
 		<div className="login-page">
 			<div className="login-container">
