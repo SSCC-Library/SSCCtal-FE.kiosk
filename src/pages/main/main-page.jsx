@@ -1,12 +1,12 @@
 import MainForm from './main-form';
 import './main.css';
 import { useLocation, useNavigate } from 'react-router-dom';
-/*import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 function MainPage() {
 	const location = useLocation();
 	const navigate = useNavigate();
-	const user = location.state?.user;
+	const user = JSON.parse(localStorage.getItem('user'));
 
 	useEffect(() => {
 		if (!user) {
@@ -26,8 +26,8 @@ function MainPage() {
 			</div>
 		</div>
 	);
-}*/
-function MainPage() {
+}
+/*function MainPage() {
 	const location = useLocation();
 	const user = location.state?.user;
 
@@ -42,6 +42,6 @@ function MainPage() {
 			</div>
 		</div>
 	);
-}
+}*/
 
 export default MainPage;
