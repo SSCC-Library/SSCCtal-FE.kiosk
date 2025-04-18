@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '@/components/button';
 import './qrscan.css';
 import { useNavigate, useLocation } from 'react-router-dom';
+import VideoStream from '../../components/video-stream';
 
 function QRForm() {
 	const navigate = useNavigate();
@@ -20,6 +21,7 @@ function QRForm() {
 
 	return (
 		<div>
+			<VideoStream />
 			<Button onClick={handle_qr_success} class_name="picture-button">
 				촬영
 			</Button>

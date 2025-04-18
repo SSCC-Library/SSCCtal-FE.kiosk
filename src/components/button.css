@@ -16,7 +16,7 @@
 
 .main-button {
 	position: absolute;
-	top: 370px;
+	top: 450px;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 220px;
@@ -32,7 +32,7 @@
 
 .picture-button {
 	position: absolute;
-	top: 310px;
+	top: 390px;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 220px;
