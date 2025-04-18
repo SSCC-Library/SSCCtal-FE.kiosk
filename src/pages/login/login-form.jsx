@@ -56,7 +56,8 @@ function LoginForm() {
 				const user = await verifyUserBySchoolNumber(user_id);
 				console.log('유저 확인됨:', user);
 				set_message(SUCCESS_MESSAGES.login_success);
-				navigate('/main', { state: { user } });
+				localStorage.setItem('user', JSON.stringify(user));
+				navigate('/main');
 			} catch (err) {
 				if (err.response?.status === 404) {
 					set_error(ERROR_MESSAGES.user_not_found || '등록되지 않은 유저입니다');
