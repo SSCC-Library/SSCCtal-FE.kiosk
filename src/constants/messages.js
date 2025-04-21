@@ -1,6 +1,8 @@
 export const ERROR_MESSAGES = {
 	invalid_login: '학번 혹은 비밀번호를 잘못 입력하였습니다. {count}번 남았습니다.',
 	login_fail: '로그인 요청 실패',
+	over_rental: '대여 가능 개수를 초과하였습니다',
+	is_rental: '이미 대여중인 {type}입니다',
 };
 
 export const SUCCESS_MESSAGES = {

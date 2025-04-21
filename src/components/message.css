@@ -7,6 +7,16 @@
 	padding: 8px 12px;
 	border-radius: 6px;
 	text-align: center;
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 500;
+}
+
+.message.result {
+	width: 200px;
+	top: 390px;
+	line-height: 17px;
+	color: rgb(99, 99, 99);
 }
 
 .message.success {
