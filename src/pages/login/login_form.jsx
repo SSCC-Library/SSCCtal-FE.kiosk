@@ -83,7 +83,7 @@ function LoginForm() {
 			<InputField
 				type="text"
 				value={user_id}
-				onChange={(e) => set_user_id(e.target.value)}
+				onChange={(e) => set_user_id(parseInt(e.target.value))}
 				placeholder="학번 입력"
 				class_name="student-id"
 			/>
