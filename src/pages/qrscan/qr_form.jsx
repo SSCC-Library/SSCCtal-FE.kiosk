@@ -13,13 +13,13 @@ function QRForm() {
 	const { mode } = location.state || {};
 
 	const handle_qr_scan = async () => {
-		set_is_camera_on(true);
-		set_is_requesting(true);
+		set_is_camera_on(false);
+		set_is_requesting(false);
 
 		try {
 			const res = await qrScanStart();
-			set_is_camera_on(false);
-			set_is_requesting(false);
+			set_is_camera_on(true);
+			set_is_requesting(true);
 
 			if (res.data.state === 'fail') {
 				alert(res.message || 'QR 인식 실패');
