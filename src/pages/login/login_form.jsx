@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { loginRequest } from '@/api/auth_api';
-import { SUCCESS_MESSAGES, ERROR_MESSAGES, INFO_MESSAGES } from '@/constants/messages';
+import { ERROR_MESSAGES, INFO_MESSAGES } from '@/constants/messages';
 import InputField from '@/components/input_field';
 import Button from '@/components/button';
 import Message from '@/components/message';
 import { use_login_limiter } from '@/hooks/use_login_limiter';
 import './login.css';
 import { useNavigate } from 'react-router-dom';
-import { verifyUserBySchoolNumber } from '@/api/user_api';
+import { login } from '@/api/user_api';
 
 function LoginForm() {
 	const navigate = useNavigate();
@@ -33,40 +32,32 @@ function LoginForm() {
 		if (is_locked) {
 			return;
 		}
-
 		try {
-			const res = await loginRequest(user_id, pwd);
-			const match = res.match(/sToken=([^&]+)&/);
+			const res = await login(user_id, pwd);
 
-			if (!match) {
-				add_attempt();
-
-				if (check()) {
-					lock_temporarily();
-					return;
-				}
-				set_error(ERROR_MESSAGES.invalid_login.replace('{count}', 3 - attempts));
-				return;
-			}
-
-			set_attempts(0);
-			console.log('sToken:', match[1]);
-
-			try {
-				const user = await verifyUserBySchoolNumber(user_id);
-				console.log('유저 확인됨:', user);
-				set_message(SUCCESS_MESSAGES.login_success);
-				localStorage.setItem('user', JSON.stringify(user));
+			if (res.success) {
+				localStorage.setItem('user', JSON.stringify(res));
 				navigate('/main');
-			} catch (err) {
-				if (err.response?.status === 404) {
-					set_error(ERROR_MESSAGES.user_not_found || '등록되지 않은 유저입니다');
+			} else {
+				if (res.code === 400) {
+					add_attempt();
+
+					if (check()) {
+						lock_temporarily();
+						return;
+					}
+					set_error(ERROR_MESSAGES.invalid_login.replace('{count}', 3 - attempts));
+					return;
+				} else if (res.code === 401) {
+					set_error(ERROR_MESSAGES.user_not_found);
 				} else {
-					set_error(`${ERROR_MESSAGES.login_fail}: ${err.message}`);
+					set_error(ERROR_MESSAGES.unknown);
 				}
 			}
 		} catch (err) {
-			set_error(`${ERROR_MESSAGES.login_fail}: ${err.message}`);
+			set_error(
+				`${ERROR_MESSAGES.login_fail}: ${err?.message || '서버와 통신 중 오류 발생'}`
+			);
 		}
 	};
 
