@@ -3,7 +3,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const login = async (school_number, password) => {
 	try {
-		const res = await axios.post(`${BACKEND_URL}/login`, {
+		const res = await axios.post(`${BACKEND_URL}/api/v0/login`, {
 			student_id: school_number,
 			password: password,
 		});
