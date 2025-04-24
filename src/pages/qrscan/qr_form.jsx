@@ -21,10 +21,10 @@ function QRForm() {
 			set_is_camera_on(true);
 			set_is_requesting(true);
 
-			if (res.data.state === 'fail') {
+			if (res.success === false) {
 				alert(res.message || 'QR 인식 실패');
 				navigate('/qrscan', { state: { mode } });
-			} else if (res.data.state === 'success') {
+			} else if (res.success === true) {
 				const book = res.data.book;
 				localStorage.setItem('book', JSON.stringify(book));
 				navigate(`/${mode}`);
