@@ -10,7 +10,8 @@ function QRForm() {
 	const [is_requesting, set_is_requesting] = useState(false);
 	const [is_camera_on, set_is_camera_on] = useState(false);
 	const location = useLocation();
-	const { mode } = location.state || {};
+	//const { mode } = location.state || {};
+	const mode = 'rental';
 
 	const handle_qr_scan = async () => {
 		set_is_camera_on(false);
