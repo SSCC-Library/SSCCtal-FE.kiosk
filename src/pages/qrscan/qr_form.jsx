@@ -10,7 +10,17 @@ function QRForm() {
 	const [is_requesting, set_is_requesting] = useState(false);
 	const [is_camera_on, set_is_camera_on] = useState(false);
 	const location = useLocation();
-	//const { mode } = location.state || {};
+	/*const { mode } = location.state || {};
+	const user = JSON.parse(localStorage.getItem('user'));
+
+	useEffect(() => {
+		if (!user) {
+			alert('잘못된 접근입니다. 로그인 후 이용하세요.');
+			navigate('/');
+		}
+	}, [user, navigate]);
+
+	if (!user) return null;*/
 	const mode = 'rental';
 
 	const handle_qr_scan = async () => {
@@ -18,8 +28,7 @@ function QRForm() {
 		set_is_requesting(false);
 
 		try {
-			/*
-			set_is_requesting(true);
+			/*set_is_requesting(true);
 			const res = await qrScanStart();
 			set_is_camera_on(true);
 
@@ -29,8 +38,14 @@ function QRForm() {
 			} else if (res.success === true) {
 				const item = res.data;
 				localStorage.setItem('item', JSON.stringify(item));
-				if (item.status === 'available') navigate('/info');
-				else
+				if (item.status === 'available') {
+					const current_rentals = user[item.type];
+					if (!current_rentals || current_rentals.length === 0) navigate('/info');
+					else
+						navigate('/result/failure', {
+							state: { mode, type: item.type, state: 'over_rental' },
+						});
+				} else
 					navigate('/result/failure', {
 						state: { mode, type: item.type, state: 'is_rental' },
 					});
