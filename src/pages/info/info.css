@@ -1,0 +1,103 @@
+.info-container {
+	position: relative;
+	top: 40px;
+	width: 400px;
+	height: 600px;
+	margin: 0 auto;
+	background: #fff;
+	border: 2px solid #2e5bff;
+	border-radius: 20px;
+	box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+.info-title {
+	position: absolute;
+	width: 300px;
+	height: 38px;
+	left: 60px;
+	top: 80px;
+
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 700;
+	font-size: 32px;
+	line-height: 38px;
+
+	color: #003c9e;
+}
+
+.item-container {
+	box-sizing: border-box;
+
+	position: absolute;
+	width: 149px;
+	height: 155px;
+	left: calc(50% - 149px / 2 + 80.5px);
+	top: 150px;
+
+	background: #ffffff;
+	border: 5px solid #d9d9d9;
+	border-radius: 24px;
+}
+.item-picture {
+	box-sizing: border-box;
+
+	position: absolute;
+	width: 149px;
+	height: 155px;
+	left: calc(50% - 149px / 2 - 80.5px);
+	top: 150px;
+
+	background: #ffffff;
+	border: 5px solid #d9d9d9;
+	border-radius: 24px;
+}
+
+.item-title {
+	position: absolute;
+	width: 140px;
+	height: 17px;
+	left: calc(50% - 149px / 2 + 90.5px);
+	top: 170px;
+
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+
+	color: #000000;
+}
+
+.item-rental-date {
+	position: absolute;
+	width: 140px;
+	height: 17px;
+	left: calc(50% - 149px / 2 + 90.5px);
+	top: 220px;
+
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+
+	color: #000000;
+}
+
+.item-return-date {
+	position: absolute;
+	width: 140px;
+	height: 17px;
+	left: calc(50% - 149px / 2 + 90.5px);
+	top: 270px;
+
+	font-family: 'Noto Sans KR';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+
+	color: #000000;
+}
