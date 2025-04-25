@@ -17,7 +17,7 @@ function QRForm() {
 		set_is_requesting(false);
 
 		try {
-			const res = await qrScanStart();
+			/*const res = await qrScanStart();
 			set_is_camera_on(true);
 			set_is_requesting(true);
 
@@ -28,7 +28,18 @@ function QRForm() {
 				const book = res.data.book;
 				localStorage.setItem('book', JSON.stringify(book));
 				navigate(`/${mode}`);
-			}
+			}*/
+			const dummy_data = {
+				success: true,
+				code: 200,
+				data: {
+					type: 'book',
+					title: '혼자 공부하는 파이썬',
+					status: 'available',
+					//img = {이미지 파일}
+				},
+			};
+			navigate('/info', { state: { mode, item: dummy_data } });
 		} catch (err) {
 			console.error('QR 요청 실패:', err);
 			alert('요청 중 오류 발생');
