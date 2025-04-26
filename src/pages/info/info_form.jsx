@@ -26,12 +26,16 @@ function InfoForm({ item, mode, current_date, return_date }) {
 			navigate('/main');
 		}
 	};
+	const handle_retry = () => {
+		localStorage.removeItem('item');
+		navigate(-1);
+	};
 	return (
 		<div>
 			<Button onClick={handle_item} class_name="login-button">
 				{mode === 'rental' ? '대여하기' : '반납하기'}
 			</Button>
-			<Button onClick={() => navigate(-1)} class_name="picture-button">
+			<Button onClick={handle_retry} class_name="picture-button">
 				QR코드 재인식
 			</Button>
 			<Button onClick={() => navigate('/main')} class_name="main-button">
