@@ -13,8 +13,7 @@ function SuccessPage() {
 			<img src={successImg} alt="성공 이미지" className="success-image" />
 			<div className="title">{mode === 'rental' ? '대여' : '반납'} 성공</div>
 			<div className="success-label">
-				{type === 'book' ? '도서' : '물품'} {mode === 'rental' ? '대여가' : '반납이'}{' '}
-				완료되었습니다.
+				{mode === 'rental' ? '대여가' : '반납이'} 완료되었습니다.
 			</div>
 			<Button onClick={() => navigate('/main')} class_name="main-button">
 				홈으로

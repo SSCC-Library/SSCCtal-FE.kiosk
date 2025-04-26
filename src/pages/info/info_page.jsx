@@ -1,15 +1,16 @@
 import InfoForm from './info_form';
 import './info.css';
 import { useLocation } from 'react-router-dom';
+import { use_get_date } from '@/hooks/use_get_date';
 
 function InfoPage() {
 	const location = useLocation();
 	// const { item, mode } = location.state;
 	// const data = item.data;
 
-	const user = JSON.parse(localStorage.getItem('user'));
 	const item = JSON.parse(localStorage.getItem('item'));
 	const { mode } = location.state;
+	const { current_string, return_string } = use_get_date();
 
 	return (
 		<div className="info-page">
@@ -22,9 +23,14 @@ function InfoPage() {
 					<img src={item.img} />
 				</div>
 				<div className="item-title">책 제목: {item.title}</div>
-				<div className="item-rental-date">대여 일자: 25.03.12</div>
-				<div className="item-return-date">반납 일자: 25.03.26</div>
-				<InfoForm item={item} mode={mode} />
+				<div className="item-rental-date">대여 일자: {current_string}</div>
+				<div className="item-return-date">반납 일자: {return_string}</div>
+				<InfoForm
+					item={item}
+					mode={mode}
+					current_date={current_string}
+					return_date={return_string}
+				/>
 			</div>
 		</div>
 	);
