@@ -10,19 +10,18 @@ function FailurePage() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [error, set_error] = useState('');
-	//const { mode, type, state } = location.state || {};
-	const mode = '대여';
-	const type = '도서';
-	const state = 'is_rental';
+	const { mode, state } = location.state || {};
+	// const mode = '대여';
+	// const state = 'is_rental';
 
 	useEffect(() => {
-		set_error(ERROR_MESSAGES[state].replace('{type}', type));
+		set_error(ERROR_MESSAGES[state]);
 	}, []);
 
 	return (
 		<div className="failure-container">
 			<img src={failureImg} alt="실패 이미지" className="failure-image" />
-			<div className="title">{mode} 실패</div>
+			<div className="title">{mode === 'rental' ? '대여' : '반납'} 실패</div>
 			<Message type="message" text={error} class_name="result" />
 			<Button onClick={() => navigate('/main')} class_name="main-button">
 				확인
