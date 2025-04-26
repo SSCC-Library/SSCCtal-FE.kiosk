@@ -3,7 +3,8 @@ export const ERROR_MESSAGES = {
 	login_fail: '로그인 요청 실패',
 	user_not_found: 'SSCC 회원이 아닙니다',
 	over_rental: '대여 가능 개수를 초과하였습니다',
-	is_rental: '이미 대여중인 {type}입니다',
+	is_rental: '이미 대여중 입니다',
+	is_return: '이미 반납 처리 되었습니다',
 	unknown: '알 수 없는 오류가 발생했습니다',
 };
 
