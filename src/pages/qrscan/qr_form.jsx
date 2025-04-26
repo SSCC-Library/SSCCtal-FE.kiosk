@@ -4,23 +4,18 @@ import './qrscan.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import VideoStream from '@/components/video_stream';
 import { qrScanStart } from '@/api/qr_api';
-
+import { manual_input_id } from '@/api/manual_input_api';
+import { use_user } from '@/hooks/use_user';
 function QRForm() {
 	const navigate = useNavigate();
 	const [is_requesting, set_is_requesting] = useState(false);
 	const [is_camera_on, set_is_camera_on] = useState(false);
+	const [is_id_input, set_is_id_input] = useState(false);
+	const [manual_id, set_manual_id] = useState('');
 	const location = useLocation();
 	const { mode } = location.state || {};
-	const user = JSON.parse(localStorage.getItem('user'));
+	const user = use_user();
 
-	useEffect(() => {
-		if (!user) {
-			alert('잘못된 접근입니다. 로그인 후 이용하세요.');
-			navigate('/');
-		}
-	}, [user, navigate]);
-
-	if (!user) return null;
 	//const mode = 'rental';
 
 	const handle_qr_scan = async () => {
@@ -29,31 +24,14 @@ function QRForm() {
 
 		try {
 			//set_is_requesting(true);
-			const res = await qrScanStart();
+			//const res = await qrScanStart();
 			//set_is_camera_on(true);
-
+			const res = { success: false };
 			if (res.success === false) {
-				alert(res.message || 'QR 인식 실패');
-				navigate('/qrscan', { state: { mode } });
+				alert('QR 인식이 실패하였습니다. ISBN을 직접 입력해주세요');
+				set_is_id_input(true);
 			} else if (res.success === true) {
-				if (mode === 'rental') {
-					if (res.status === 'available') {
-						localStorage.setItem('item', JSON.stringify(res));
-						// const current_rentals = user[item.type];
-						// if (!current_rentals || current_rentals.length === 0) navigate('/info');
-						// else
-						// 	navigate('/result/failure', {
-						// 		state: { mode, type: item.type, state: 'over_rental' },
-						// 	});
-						navigate('/info', { state: { mode } });
-					} else
-						navigate('/result/failure', {
-							state: { mode, state: 'is_rental' },
-						});
-				} else {
-					if (res.status === 'available')
-						navigate('/result/failure', { state: { mode, state: 'is_return' } });
-				}
+				handle_item_flow(res);
 			}
 			// const dummy_data = {
 			// 	success: true,
@@ -75,6 +53,49 @@ function QRForm() {
 		}
 	};
 
+	const handle_item_input = async () => {
+		try {
+			const res = await manual_input_id(manual_id);
+
+			if (res.success === true) {
+				handle_item_flow(res);
+			} else {
+				alert('동아리에 없는 도서입니다. 다시 입력해주세요');
+			}
+		} catch (err) {
+			console.error('QR 요청 실패:', err);
+			alert('서버와 연결 실패');
+		}
+	};
+
+	const handle_item_flow = (res) => {
+		if (mode === 'rental') {
+			if (res.status === 'available') {
+				localStorage.setItem('item', JSON.stringify(res));
+				if (user.rental_item.length === 0) navigate('/info', { state: { mode } });
+				else {
+					localStorage.removeItem('item');
+					navigate('/result/failure', {
+						state: { mode, state: 'over_rental' },
+					});
+				}
+				//navigate('/info', { state: { mode } });
+			} else
+				navigate('/result/failure', {
+					state: { mode, state: 'is_rental' },
+				});
+		} else {
+			if (res.status === 'available')
+				navigate('/result/failure', { state: { mode, state: 'is_return' } });
+			else {
+				if (res.item_id === user.rental_item) {
+					localStorage.setItem('item', JSON.stringify(res));
+					navigate('/info', { state: { mode } });
+				} else navigate('/result/failure', { state: { mode, state: 'dif_return' } });
+			}
+		}
+	};
+
 	return (
 		<div>
 			{is_camera_on && <VideoStream />}
@@ -84,6 +105,32 @@ function QRForm() {
 			<Button onClick={() => navigate('/main')} class_name="main-button">
 				홈으로
 			</Button>
+
+			{is_id_input && (
+				<>
+					<div className="manual-input-overlay"></div>
+					<div className="manual-input-section">
+						<button className="close-button" onClick={() => set_is_id_input(false)}>
+							✖
+						</button>
+						<input
+							type="text"
+							placeholder="ISBN을 입력하세요"
+							value={manual_id}
+							onChange={(e) => set_manual_id(e.target.value)}
+							className="manual-input"
+						/>
+						<div className="button-group">
+							<Button onClick={handle_item_input} class_name="submit-button">
+								확인
+							</Button>
+							<Button onClick={() => navigate('/main')} class_name="submit-button">
+								홈으로
+							</Button>
+						</div>
+					</div>
+				</>
+			)}
 		</div>
 	);
 }
