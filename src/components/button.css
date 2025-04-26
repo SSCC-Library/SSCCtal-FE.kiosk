@@ -86,3 +86,15 @@
 	line-height: 24px;
 	color: #2e5bff;
 }
+
+.submit-button {
+	width: 100px;
+	height: 40px;
+	background: #4969e0;
+	border-radius: 10px;
+
+	color: white;
+	font-weight: 500;
+	font-size: 14px;
+	border: none;
+}
