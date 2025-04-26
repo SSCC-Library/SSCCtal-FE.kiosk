@@ -1,19 +1,8 @@
 import MainForm from './main_form';
 import './main.css';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
-
+import { use_user } from '@/hooks/use_user';
 function MainPage() {
-	const location = useLocation();
-	const navigate = useNavigate();
-	const user = JSON.parse(localStorage.getItem('user'));
-
-	useEffect(() => {
-		if (!user) {
-			alert('잘못된 접근입니다. 로그인 후 이용하세요.');
-			navigate('/');
-		}
-	}, [user, navigate]);
+	const user = use_user();
 
 	if (!user) return null;
 
