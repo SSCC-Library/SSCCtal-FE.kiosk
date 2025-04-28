@@ -10,7 +10,7 @@ function LoginPage() {
 
 	return (
 		<div className="login-container">
-			<div className="login-title">SCLibrary</div>
+			<div className="login-title">SSCCtal</div>
 			<div className="login-label">유세인트 계정을 입력하세요</div>
 			<LoginForm />
 		</div>
