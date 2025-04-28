@@ -63,7 +63,7 @@ function QRForm() {
 				alert('동아리에 없는 도서입니다. 다시 입력해주세요');
 			}
 		} catch (err) {
-			console.error('QR 요청 실패:', err);
+			console.error('요청 실패:', err);
 			alert('서버와 연결 실패');
 		}
 	};
@@ -72,14 +72,14 @@ function QRForm() {
 		if (mode === 'rental') {
 			if (res.status === 'available') {
 				localStorage.setItem('item', JSON.stringify(res));
-				if (user.rental_item.length === 0) navigate('/info', { state: { mode } });
-				else {
-					localStorage.removeItem('item');
-					navigate('/result/failure', {
-						state: { mode, state: 'over_rental' },
-					});
-				}
-				//navigate('/info', { state: { mode } });
+				// if (user.rental_item.length === 0) navigate('/info', { state: { mode } });
+				// else {
+				// 	localStorage.removeItem('item');
+				// 	navigate('/result/failure', {
+				// 		state: { mode, state: 'over_rental' },
+				// 	});
+				// }
+				navigate('/info', { state: { mode } });
 			} else
 				navigate('/result/failure', {
 					state: { mode, state: 'is_rental' },
