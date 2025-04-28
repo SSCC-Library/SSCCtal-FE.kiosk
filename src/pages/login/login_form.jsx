@@ -85,7 +85,7 @@ function LoginForm() {
 					placeholder="비밀번호 입력"
 				/>
 			</div>
-			<Button type="submit" class_name="login-button" disabled={is_locked}>
+			<Button type="submit" class_name="default-button" disabled={is_locked}>
 				로그인
 			</Button>
 			<Message type="success" text={message} class_name="success" />
