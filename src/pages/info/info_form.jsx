@@ -8,6 +8,7 @@ import { use_user } from '@/hooks/use_user';
 function InfoForm({ item, mode, current_date, return_date }) {
 	const navigate = useNavigate();
 	const user = use_user();
+
 	const handle_item = async () => {
 		//navigate('/result/success', { state: { mode } });
 		try {
@@ -26,6 +27,7 @@ function InfoForm({ item, mode, current_date, return_date }) {
 			navigate('/main');
 		}
 	};
+
 	const handle_retry = () => {
 		localStorage.removeItem('item');
 		navigate(-1);
