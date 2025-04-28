@@ -6,6 +6,8 @@ function LoginPage() {
 	useEffect(() => {
 		localStorage.removeItem('user');
 		console.log('로그아웃 처리');
+		localStorage.removeItem('item');
+		console.log('아이템 삭제');
 	}, []);
 
 	return (
