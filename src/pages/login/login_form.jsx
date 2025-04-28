@@ -71,7 +71,7 @@ function LoginForm() {
 
 	return (
 		<form onSubmit={handle_submit}>
-			<div className="input-container">
+			<div className="login-input-container">
 				<InputField
 					type="text"
 					value={user_id}

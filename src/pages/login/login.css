@@ -26,7 +26,7 @@
 	color: #8fa7ff;
 }
 
-.input-container {
+.login-input-container {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
