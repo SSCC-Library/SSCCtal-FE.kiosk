@@ -31,14 +31,20 @@ function InfoForm({ item, mode, current_date, return_date }) {
 		navigate(-1);
 	};
 	return (
-		<div>
-			<Button onClick={handle_item} class_name="login-button">
+		<div className="info-button-container">
+			<Button onClick={handle_item} class_name="default-button">
 				{mode === 'rental' ? '대여하기' : '반납하기'}
 			</Button>
-			<Button onClick={handle_retry} class_name="picture-button">
+			<Button onClick={handle_retry} class_name="default-button">
 				QR코드 재인식
 			</Button>
-			<Button onClick={() => navigate('/main')} class_name="main-button">
+			<Button
+				onClick={() => {
+					localStorage.removeItem('item');
+					navigate('/main');
+				}}
+				class_name="default-button"
+			>
 				홈으로
 			</Button>
 		</div>
