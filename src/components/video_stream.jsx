@@ -32,11 +32,7 @@ function VideoStream() {
 		};
 	}, []);
 
-	return (
-		<div className="video">
-			<img ref={imgRef} width="250" alt="ESP32 Video" />
-		</div>
-	);
+	return <img ref={imgRef} alt="ESP32 Video" />;
 }
 
 export default VideoStream;

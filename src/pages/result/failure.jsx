@@ -20,12 +20,14 @@ function FailurePage() {
 
 	return (
 		<div className="failure-container">
-			<img src={failureImg} alt="실패 이미지" className="failure-image" />
-			<div className="title">{mode === 'rental' ? '대여' : '반납'} 실패</div>
-			<Message type="message" text={error} class_name="result" />
-			<Button onClick={() => navigate('/main')} class_name="main-button">
-				확인
-			</Button>
+			<div className="failure-content">
+				<div className="failure-title">{mode === 'rental' ? '대여' : '반납'} 실패</div>
+				<img src={failureImg} alt="실패 이미지" className="failure-image" />
+				<Message type="message" text={error} class_name="result" />
+				<Button onClick={() => navigate('/main')} class_name="default-button">
+					확인
+				</Button>
+			</div>
 		</div>
 	);
 }

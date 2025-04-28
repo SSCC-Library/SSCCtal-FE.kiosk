@@ -1,46 +1,65 @@
 .qrscan-container {
-	position: relative;
-	top: 40px;
 	width: 400px;
 	height: 600px;
-	margin: 0 auto;
+	margin: 40px auto 0 auto;
 	background: #fff;
 	border: 2px solid #2e5bff;
 	border-radius: 20px;
 	box-sizing: border-box;
 	font-family: 'Noto Sans KR', sans-serif;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .qrscan-title {
-	position: absolute;
-	width: 300px;
-	height: 38px;
-	left: calc(50% - 200px / 2);
-	top: 80px;
-
-	font-family: 'Noto Sans KR';
-	font-style: normal;
+	margin-top: 50px;
 	font-weight: 700;
-	font-size: 32px;
-	line-height: 38px;
-
+	font-size: 50px;
 	color: #003c9e;
 }
 
 .qrscan-label {
-	position: absolute;
-	width: 300px;
-	height: 17px;
-	left: calc(50% - 140px);
-	top: 150px;
-
-	font-family: 'Noto Sans KR';
-	font-style: normal;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 17px;
-
+	margin-top: 30px;
+	font-size: 12px;
 	color: #000000;
+}
+
+.qrscan-button-container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.manual-input {
+	width: 300px;
+	padding: 12px;
+	margin-bottom: 15px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	font-size: 16px;
+	text-align: center;
+}
+
+.button-group {
+	display: flex;
+	gap: 15px;
+	justify-content: center;
+	margin-top: 10px;
+}
+
+.manual-input-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 999;
 }
 
 .manual-input-section {
@@ -58,32 +77,6 @@
 	z-index: 1000; /* 다른 요소 위로 */
 }
 
-.manual-input {
-	width: 300px;
-	padding: 12px;
-	margin-bottom: 15px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	font-size: 16px;
-	text-align: center;
-}
-
-.button-group {
-	display: flex;
-	gap: 15px;
-	justify-content: center;
-}
-
-.manual-input-overlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.5);
-	z-index: 999;
-}
-
 .close-button {
 	position: absolute;
 	top: 1px;
@@ -98,4 +91,13 @@
 
 .close-button:hover {
 	color: #ff4d4f;
+}
+
+.qrscan-content {
+	flex: 1;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px 0;
 }

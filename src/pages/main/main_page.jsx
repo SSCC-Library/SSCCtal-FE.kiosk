@@ -7,12 +7,10 @@ function MainPage() {
 	if (!user) return null;
 
 	return (
-		<div className="main-page">
-			<div className="main-container">
-				<div className="title">SCLibrary</div>
-				<div className="label">{user.name}님 환영합니다</div>
-				<MainForm />
-			</div>
+		<div className="main-container">
+			<div className="main-title">SSCCtal</div>
+			<div className="main-label">{user.name}님 환영합니다</div>
+			<MainForm />
 		</div>
 	);
 }

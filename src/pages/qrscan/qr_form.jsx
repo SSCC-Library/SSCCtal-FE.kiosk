@@ -6,6 +6,8 @@ import VideoStream from '@/components/video_stream';
 import { qrScanStart } from '@/api/qr_api';
 import { manual_input_id } from '@/api/manual_input_api';
 import { use_user } from '@/hooks/use_user';
+import InputField from '@/components/input_field';
+
 function QRForm() {
 	const navigate = useNavigate();
 	const [is_requesting, set_is_requesting] = useState(false);
@@ -97,15 +99,26 @@ function QRForm() {
 	};
 
 	return (
-		<div>
-			{is_camera_on && <VideoStream />}
-			<Button onClick={handle_qr_scan} class_name="picture-button" disabled={is_requesting}>
-				촬영
-			</Button>
-			<Button onClick={() => navigate('/main')} class_name="main-button">
-				홈으로
-			</Button>
-
+		<div className="qrscan-content">
+			<div className="video-container">
+				{is_camera_on ? (
+					<VideoStream />
+				) : (
+					<div className="video-placeholder">카메라 대기 중...</div>
+				)}
+			</div>
+			<div className="qrscan-button-container">
+				<Button
+					onClick={handle_qr_scan}
+					class_name="default-button"
+					disabled={is_requesting}
+				>
+					촬영
+				</Button>
+				<Button onClick={() => navigate('/main')} class_name="default-button">
+					홈으로
+				</Button>
+			</div>
 			{is_id_input && (
 				<>
 					<div className="manual-input-overlay"></div>
@@ -113,18 +126,17 @@ function QRForm() {
 						<button className="close-button" onClick={() => set_is_id_input(false)}>
 							✖
 						</button>
-						<input
+						<InputField
 							type="text"
 							placeholder="ISBN을 입력하세요"
 							value={manual_id}
 							onChange={(e) => set_manual_id(e.target.value)}
-							className="manual-input"
 						/>
 						<div className="button-group">
-							<Button onClick={handle_item_input} class_name="submit-button">
+							<Button onClick={handle_item_input} class_name="mini-button">
 								확인
 							</Button>
-							<Button onClick={() => navigate('/main')} class_name="submit-button">
+							<Button onClick={() => navigate('/main')} class_name="mini-button">
 								홈으로
 							</Button>
 						</div>

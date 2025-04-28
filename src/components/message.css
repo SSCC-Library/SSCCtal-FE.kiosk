@@ -1,8 +1,4 @@
 .message {
-	position: relative;
-	top: 370px;
-	left: 50%;
-	transform: translateX(-50%);
 	font-size: 14px;
 	padding: 8px 12px;
 	border-radius: 6px;
@@ -13,8 +9,6 @@
 }
 
 .message.result {
-	width: 200px;
-	top: 390px;
 	line-height: 17px;
 	color: rgb(99, 99, 99);
 }
