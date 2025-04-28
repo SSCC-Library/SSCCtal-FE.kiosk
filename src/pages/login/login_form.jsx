@@ -71,20 +71,20 @@ function LoginForm() {
 
 	return (
 		<form onSubmit={handle_submit}>
-			<InputField
-				type="text"
-				value={user_id}
-				onChange={(e) => set_user_id(parseInt(e.target.value))}
-				placeholder="학번 입력"
-				class_name="student-id"
-			/>
-			<InputField
-				type="password"
-				value={pwd}
-				onChange={(e) => set_pwd(e.target.value)}
-				placeholder="비밀번호 입력"
-				class_name="password"
-			/>
+			<div className="input-container">
+				<InputField
+					type="text"
+					value={user_id}
+					onChange={(e) => set_user_id(parseInt(e.target.value))}
+					placeholder="학번 입력"
+				/>
+				<InputField
+					type="password"
+					value={pwd}
+					onChange={(e) => set_pwd(e.target.value)}
+					placeholder="비밀번호 입력"
+				/>
+			</div>
 			<Button type="submit" class_name="login-button" disabled={is_locked}>
 				로그인
 			</Button>
