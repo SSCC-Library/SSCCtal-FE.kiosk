@@ -10,14 +10,16 @@ function SuccessPage() {
 
 	return (
 		<div className="success-container">
-			<img src={successImg} alt="성공 이미지" className="success-image" />
-			<div className="title">{mode === 'rental' ? '대여' : '반납'} 성공</div>
-			<div className="success-label">
-				{mode === 'rental' ? '대여가' : '반납이'} 완료되었습니다.
+			<div className="success-content">
+				<div className="success-title">{mode === 'rental' ? '대여' : '반납'} 성공</div>
+				<img src={successImg} alt="성공 이미지" className="success-image" />
+				<div className="success-label">
+					{mode === 'rental' ? '대여가' : '반납이'} 완료되었습니다.
+				</div>
+				<Button onClick={() => navigate('/main')} class_name="default-button">
+					확인
+				</Button>
 			</div>
-			<Button onClick={() => navigate('/main')} class_name="main-button">
-				홈으로
-			</Button>
 		</div>
 	);
 }

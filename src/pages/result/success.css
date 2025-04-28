@@ -1,37 +1,43 @@
 .success-container {
-	position: relative;
-	top: 40px;
 	width: 400px;
 	height: 600px;
-	margin: 0 auto;
+	margin: 40px auto 0 auto;
 	background: #fff;
 	border: 2px solid #2e5bff;
 	border-radius: 20px;
 	box-sizing: border-box;
 	font-family: 'Noto Sans KR', sans-serif;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	text-align: center;
 }
 
-.success-label {
-	position: absolute;
-	width: 200px;
-	height: 17px;
-	left: calc(50% - 200px / 2);
-	top: 390px;
+.success-title {
+	margin-top: 50px;
+	font-weight: 700;
+	font-size: 50px;
+	color: #003c9e;
+}
 
-	font-family: 'Noto Sans KR';
-	font-style: normal;
-	font-weight: 500;
+.success-image {
+	width: 230px;
+	height: 230px;
+	margin-bottom: 20px;
+}
+
+.success-label {
+	width: 200px;
 	font-size: 14px;
 	line-height: 17px;
 	color: rgb(99, 99, 99);
 }
 
-.success-image {
-	position: absolute;
-	width: 200px;
-	height: 200px;
-	left: 95px;
-	top: 140px;
-	margin-bottom: 20px;
+.success-content {
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+	justify-content: center;
+	align-items: center;
 }
