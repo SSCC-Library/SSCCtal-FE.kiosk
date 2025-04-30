@@ -6,6 +6,7 @@ export const ERROR_MESSAGES = {
 	is_rental: '이미 대여중 입니다',
 	is_return: '이미 반납 처리 되었습니다',
 	unknown: '알 수 없는 오류가 발생했습니다',
+	dif_return: '대여 기록이 없습니다',
 };
 
 export const SUCCESS_MESSAGES = {
