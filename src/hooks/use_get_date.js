@@ -14,12 +14,13 @@ export function use_get_date() {
 			('0' + (today.getMonth() + 1)).slice(-2) +
 			'-' +
 			('0' + today.getDate()).slice(-2) +
-			'/' +
+			'T' +
 			('0' + today.getHours()).slice(-2) +
 			':' +
 			('0' + today.getMinutes()).slice(-2) +
 			':' +
-			('0' + today.getSeconds()).slice(-2);
+			('0' + today.getSeconds()).slice(-2) +
+			'Z';
 		set_current_string(current);
 
 		// return_string: 2주 후 yyyy-mm-dd
