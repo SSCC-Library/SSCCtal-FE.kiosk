@@ -11,6 +11,7 @@ package-lock.json
 dist/
 dist-ssr/
 .vite/
+.webos/
 
 # IDEs
 .vscode/*
