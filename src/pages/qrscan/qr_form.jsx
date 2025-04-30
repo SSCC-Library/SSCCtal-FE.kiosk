@@ -111,7 +111,7 @@ function QRForm() {
 					class_name="default-button"
 					disabled={is_requesting}
 				>
-					촬영
+					촬영 시작
 				</Button>
 				<Button onClick={() => navigate('/main')} class_name="default-button">
 					홈으로
