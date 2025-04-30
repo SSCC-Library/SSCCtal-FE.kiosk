@@ -1,7 +1,7 @@
 import MainForm from './main_form';
 import './main.css';
 import { use_user } from '@/hooks/use_user';
-import { PageContainer } from '../../components/page_container';
+import { PageContainer } from '@/components/page_container';
 function MainPage() {
 	const user = use_user();
 

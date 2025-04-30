@@ -1,7 +1,7 @@
 import LoginForm from './login_form';
 import './login.css';
 import { useEffect } from 'react';
-import { PageContainer } from '../../components/page_container';
+import { PageContainer } from '@/components/page_container';
 function LoginPage() {
 	useEffect(() => {
 		localStorage.removeItem('user');
