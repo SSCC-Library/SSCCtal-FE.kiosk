@@ -17,6 +17,5 @@ export const SUCCESS_MESSAGES = {
 export const INFO_MESSAGES = {
 	redirecting: '10초 후 자동으로 이동합니다.',
 	too_many_attempts: '로그인 시도 횟수를 초과했습니다. \n{time}초 후 다시 시도하세요.',
-	alert_admin: '관리자에게 문의하세요',
-	admin_number: '010-0000-0000',
+	alert_admin: '관리자에게 문의하세요\n010-0000-0000',
 };
