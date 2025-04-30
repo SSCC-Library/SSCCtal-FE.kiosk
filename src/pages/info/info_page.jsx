@@ -3,6 +3,7 @@ import './info.css';
 import { useLocation } from 'react-router-dom';
 import { use_get_date } from '@/hooks/use_get_date';
 import default_image from '@/assets/default_book.png';
+import { PageContainer } from '@/components/page_container';
 function InfoPage() {
 	const location = useLocation();
 	// const { item, mode } = location.state;
@@ -13,10 +14,10 @@ function InfoPage() {
 	const { current_string, return_string } = use_get_date();
 
 	return (
-		<div className="info-container">
-			<div className="info-title">
-				{mode === 'rental' ? '대여 하시겠습니까?' : '반납 하시겠습니까?'}
-			</div>
+		<PageContainer
+			title={mode === 'rental' ? '대여 하시겠습니까?' : '반납 하시겠습니까?'}
+			title_color="#003c9e"
+		>
 			<div className="item-container">
 				<div className="item-picture">
 					<img src={item.img || default_image} />
@@ -34,7 +35,7 @@ function InfoPage() {
 				current_date={current_string}
 				return_date={return_string}
 			/>
-		</div>
+		</PageContainer>
 	);
 }
 
