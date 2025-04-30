@@ -7,8 +7,7 @@ export function use_user() {
 
 	useEffect(() => {
 		if (!user) {
-			alert('잘못된 접근입니다. 로그인 후 이용하세요');
-			navigate('/');
+			navigate('/', { state: { message: '잘못된 접근입니다. 로그인 후 이용하세요' } });
 		}
 	}, [user, navigate]);
 
