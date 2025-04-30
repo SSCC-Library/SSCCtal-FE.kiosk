@@ -90,10 +90,8 @@ function QRForm() {
 			if (res.status === 'available')
 				navigate('/result/failure', { state: { mode, state: 'is_return' } });
 			else {
-				if (res.item_id === user.rental_item) {
-					localStorage.setItem('item', JSON.stringify(res));
-					navigate('/info', { state: { mode } });
-				} else navigate('/result/failure', { state: { mode, state: 'dif_return' } });
+				localStorage.setItem('item', JSON.stringify(res));
+				navigate('/info', { state: { mode } });
 			}
 		}
 	};
