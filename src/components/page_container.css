@@ -1,0 +1,20 @@
+.page-container {
+	height: 90vh;
+	aspect-ratio: 2 / 3;
+	margin: 5vh auto 0 auto;
+	background: #fff;
+	border: 0.5vh solid #2e5bff;
+	border-radius: 2vh;
+	box-sizing: border-box;
+	font-family: 'Noto Sans KR', sans-serif;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	font-size: 1vh;
+}
+
+.page-title {
+	margin-top: 1em;
+	font-weight: 700;
+	font-size: 8em;
+}
