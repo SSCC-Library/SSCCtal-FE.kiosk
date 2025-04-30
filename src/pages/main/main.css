@@ -1,35 +1,13 @@
-.main-container {
-	width: 400px;
-	height: 600px;
-	margin: 40px auto 0 auto;
-	background: #fff;
-	border: 2px solid #2e5bff;
-	border-radius: 20px;
-	box-sizing: border-box;
-	font-family: 'Noto Sans KR', sans-serif;
-
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.main-title {
-	margin-top: 50px;
-	font-weight: 700;
-	font-size: 50px;
-	color: #2e5bff;
-}
-
 .main-label {
-	margin-top: 30px;
-	font-size: 12px;
+	margin-top: 2em;
+	font-size: 2em;
 	color: #8fa7ff;
 }
 
 .main-button-container {
 	display: flex;
 	flex-direction: row;
-	gap: 50px;
+	gap: 4em;
 	justify-content: center;
 	align-items: center;
 }
@@ -38,6 +16,6 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 20px; /* 위 두 버튼과 아래 버튼 사이 간격 */
-	margin-top: 60px;
+	gap: 3em; /* 위 두 버튼과 아래 버튼 사이 간격 */
+	margin-top: 12em;
 }
