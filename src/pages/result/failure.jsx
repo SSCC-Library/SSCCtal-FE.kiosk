@@ -6,7 +6,7 @@ import Message from '@/components/message';
 import { useState, useEffect } from 'react';
 import { INFO_MESSAGES, ERROR_MESSAGES } from '@/constants/messages';
 import AlertModal from '@/components/alert_modal';
-
+import { PageContainer } from '@/components/page_container';
 function FailurePage() {
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -22,9 +22,8 @@ function FailurePage() {
 	}, []);
 
 	return (
-		<div className="failure-container">
+		<PageContainer title={mode === 'rental' ? '대여 실패' : '반납 실패'} title_color="#2e5bff">
 			<div className="failure-content">
-				<div className="failure-title">{mode === 'rental' ? '대여' : '반납'} 실패</div>
 				<img src={failureImg} alt="실패 이미지" className="failure-image" />
 				<Message type="message" text={error} class_name="result" />
 				<Button onClick={() => navigate('/main')} class_name="default-button">
@@ -41,7 +40,7 @@ function FailurePage() {
 				</Button>
 				{is_open && <AlertModal message={message} on_close={() => set_is_open(false)} />}
 			</div>
-		</div>
+		</PageContainer>
 	);
 }
 
