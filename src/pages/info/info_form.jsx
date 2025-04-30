@@ -21,6 +21,8 @@ function InfoForm({ item, mode, current_date, return_date }) {
 			);
 
 			if (res.success) navigate('/result/success', { state: { mode } });
+			else if (!res.success && mode === 'return')
+				navigate('/result/failure', { state: { mode, state: 'dif_return' } });
 		} catch (err) {
 			alert('서버와 통신 중 오류가 발생하였습니다. 관리자에게 문의해주세요');
 			localStorage.removeItem('item');
