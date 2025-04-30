@@ -4,13 +4,16 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import failureImg from '@/assets/failure.png';
 import Message from '@/components/message';
 import { useState, useEffect } from 'react';
-import { ERROR_MESSAGES } from '@/constants/messages';
+import { INFO_MESSAGES, ERROR_MESSAGES } from '@/constants/messages';
+import AlertModal from '@/components/alert_modal';
 
 function FailurePage() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const [error, set_error] = useState('');
 	const { mode, state } = location.state || {};
+	const [is_open, set_is_open] = useState(false);
+	const [message, set_message] = useState('');
 	// const mode = '대여';
 	// const state = 'is_rental';
 
@@ -27,6 +30,16 @@ function FailurePage() {
 				<Button onClick={() => navigate('/main')} class_name="default-button">
 					확인
 				</Button>
+				<Button
+					onClick={() => {
+						set_message(INFO_MESSAGES.alert_admin);
+						set_is_open(true);
+					}}
+					class_name="admin-button"
+				>
+					문의하기
+				</Button>
+				{is_open && <AlertModal message={message} on_close={() => set_is_open(false)} />}
 			</div>
 		</div>
 	);
