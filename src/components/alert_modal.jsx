@@ -6,7 +6,7 @@ function AlertModal({ message, on_close }) {
 		<div className="alert-backdrop">
 			<div className="alert-modal">
 				{/* <p>{code}</p> */}
-				<p>{message}</p>
+				<div className="modal-message">{message}</div>
 				<Button onClick={on_close} class_name="mini-button">
 					확인
 				</Button>
