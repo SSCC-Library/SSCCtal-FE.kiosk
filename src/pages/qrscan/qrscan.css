@@ -1,55 +1,23 @@
-.qrscan-container {
-	width: 400px;
-	height: 600px;
-	margin: 40px auto 0 auto;
-	background: #fff;
-	border: 2px solid #2e5bff;
-	border-radius: 20px;
-	box-sizing: border-box;
-	font-family: 'Noto Sans KR', sans-serif;
-
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.qrscan-title {
-	margin-top: 50px;
-	font-weight: 700;
-	font-size: 50px;
-	color: #003c9e;
-}
-
 .qrscan-label {
-	margin-top: 30px;
-	font-size: 12px;
+	margin-top: 2em;
+	font-size: 2em;
 	color: #000000;
 }
 
 .qrscan-button-container {
 	display: flex;
 	flex-direction: column;
-	gap: 20px;
+	gap: 3em;
 	justify-content: center;
 	align-items: center;
-	margin-top: 20px;
-}
-
-.manual-input {
-	width: 300px;
-	padding: 12px;
-	margin-bottom: 15px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	font-size: 16px;
-	text-align: center;
+	margin-top: 3em;
 }
 
 .button-group {
 	display: flex;
-	gap: 15px;
+	gap: 2.25em;
 	justify-content: center;
-	margin-top: 10px;
+	margin-top: 1.5em;
 }
 
 .manual-input-overlay {
@@ -68,9 +36,9 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	background: white;
-	padding: 30px;
-	border-radius: 8px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+	padding: 4em;
+	border-radius: 1.5em;
+	box-shadow: 0 1em 2em rgba(0, 0, 0, 0.3);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -79,11 +47,11 @@
 
 .close-button {
 	position: absolute;
-	top: 1px;
-	right: 1px;
+	top: 0.1em;
+	right: 0.1em;
 	background: transparent;
 	border: none;
-	font-size: 20px;
+	font-size: 3em;
 	cursor: pointer;
 	color: #333;
 	transition: color 0.2s ease;
@@ -99,5 +67,5 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 20px 0;
+	padding: 1.5em 0;
 }
