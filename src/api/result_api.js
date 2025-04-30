@@ -10,7 +10,7 @@ export const result = async (student_id, item_id, current_date, return_date, mod
 
 	if (mode === 'rental') {
 		data.rental_date = current_date;
-		data.return_date = return_date;
+		data.expectation_return_date = return_date;
 	} else {
 		data.return_date = current_date;
 	}
