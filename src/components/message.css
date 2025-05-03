@@ -14,13 +14,13 @@
 }
 
 .message.error {
-	top: 33vh;
+	top: 30vh;
 	color: red;
 	background-color: #ffe6e6;
 }
 
 .message.info {
-	top: 33vh;
+	top: 30vh;
 	color: black;
 	background-color: #e5e5e5;
 }
