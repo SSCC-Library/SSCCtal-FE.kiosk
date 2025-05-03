@@ -50,16 +50,16 @@ function MainForm() {
 			<Button onClick={() => navigate('/')} class_name="default-button">
 				로그아웃
 			</Button>
-			<Button
+			{/* <Button
 				onClick={() => {
-					set_message(INFO_MESSAGES.alert_admin);
+					set_message(format_message(INFO_MESSAGES.alert_admin));
 					set_is_open(true);
 				}}
 				class_name="admin-button"
 			>
 				문의하기
 			</Button>
-			{is_open && <AlertModal message={message} on_close={() => set_is_open(false)} />}
+			{is_open && <AlertModal message={message} on_close={() => set_is_open(false)} />} */}
 		</div>
 	);
 }
