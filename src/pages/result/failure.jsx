@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react';
 import { INFO_MESSAGES, ERROR_MESSAGES } from '@/constants/messages';
 import AlertModal from '@/components/alert_modal';
 import { PageContainer } from '@/components/page_container';
+import { format_message } from '@/utils/format_message';
+
 function FailurePage() {
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -31,7 +33,7 @@ function FailurePage() {
 				</Button>
 				<Button
 					onClick={() => {
-						set_message(INFO_MESSAGES.alert_admin);
+						set_message(format_message(INFO_MESSAGES.alert_admin));
 						set_is_open(true);
 					}}
 					class_name="admin-button"
