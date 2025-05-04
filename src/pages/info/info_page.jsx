@@ -25,10 +25,26 @@ function InfoPage() {
 
 				<div className="item-info">
 					<div className="item-title">책 제목: {item.title}</div>
-					<div className="item-rental-date">
-						대여 일자: {current_string.replace('T', ' / ').replace('Z', '')}
-					</div>
-					<div className="item-return-date">반납 일자: {return_string}</div>
+					{mode === 'rental' && (
+						<>
+							<div className="item-rental-date">
+								대여 일자: {current_string.replace('T', ' / ').replace('Z', '')}
+							</div>
+							<div className="item-return-date">반납 예정 일자: {return_string}</div>
+						</>
+					)}
+					{mode === 'return' && (
+						<>
+							<div className="item-rental-date">
+								{/* 대여 일자: {current_string.replace('T', ' / ').replace('Z', '')} */}
+								대여 일자: {item.rental_date.replace('T', ' / ').replace('Z', '')}
+							</div>
+							<div className="item-return-date">
+								{/* 반납 일자: {return_string} */}
+								반납 일자: {current_string.replace('T', ' / ').replace('Z', '')}
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 			<InfoForm
