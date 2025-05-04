@@ -1,43 +1,18 @@
-.success-container {
-	width: 400px;
-	height: 600px;
-	margin: 40px auto 0 auto;
-	background: #fff;
-	border: 2px solid #2e5bff;
-	border-radius: 20px;
-	box-sizing: border-box;
-	font-family: 'Noto Sans KR', sans-serif;
-
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	text-align: center;
-}
-
-.success-title {
-	margin-top: 50px;
-	font-weight: 700;
-	font-size: 50px;
-	color: #003c9e;
-}
-
 .success-image {
-	width: 230px;
-	height: 230px;
-	margin-bottom: 20px;
+	width: 40em;
+	height: 40em;
+	margin-bottom: 1em;
 }
 
 .success-label {
-	width: 200px;
-	font-size: 14px;
-	line-height: 17px;
+	font-size: 2.5em;
 	color: rgb(99, 99, 99);
 }
 
 .success-content {
 	display: flex;
 	flex-direction: column;
-	gap: 25px;
+	gap: 5em;
 	justify-content: center;
 	align-items: center;
 }

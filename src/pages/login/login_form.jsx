@@ -104,25 +104,7 @@ function LoginForm() {
 			<Button type="submit" class_name="default-button" disabled={is_locked}>
 				로그인
 			</Button>
-			<Button
-				onClick={() => {
-					set_message(format_message(INFO_MESSAGES.alert_admin));
-					set_is_open(true);
-				}}
-				class_name="admin-button"
-			>
-				문의하기
-			</Button>
 			<Message type="error" text={error} class_name="error" />
-			{is_open && (
-				<AlertModal
-					message={message}
-					on_close={() => {
-						set_message('');
-						set_is_open(false);
-					}}
-				/>
-			)}
 			{render_lock_message()}
 		</form>
 	);

@@ -1,28 +1,6 @@
-.login-container {
-	width: 400px;
-	height: 600px;
-	margin: 40px auto 0 auto;
-	background: #fff;
-	border: 2px solid #2e5bff;
-	border-radius: 20px;
-	box-sizing: border-box;
-	font-family: 'Noto Sans KR', sans-serif;
-
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.login-title {
-	margin-top: 50px;
-	font-weight: 700;
-	font-size: 50px;
-	color: #2e5bff;
-}
-
 .login-label {
-	margin-top: 30px;
-	font-size: 12px;
+	margin-top: 2em;
+	font-size: 2em;
 	color: #8fa7ff;
 }
 
@@ -30,14 +8,14 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 20px;
+	gap: 3em;
 }
 
 form {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 20px; /* 버튼, 메시지 사이 간격 */
+	gap: 3em;
 	width: 100%;
-	margin-top: 60px;
+	margin-top: 12em;
 }

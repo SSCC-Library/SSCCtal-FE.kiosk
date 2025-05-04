@@ -13,8 +13,13 @@
 
 .alert-modal {
 	background: white;
-	padding: 20px;
-	border-radius: 10px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+	padding: 5em;
+	border-radius: 2em;
+	box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
 	text-align: center;
+}
+
+.modal-message {
+	font-size: 2em;
+	color: rgba(0, 0, 0, 0.724);
 }
