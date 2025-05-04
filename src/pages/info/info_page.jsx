@@ -25,7 +25,9 @@ function InfoPage() {
 
 				<div className="item-info">
 					<div className="item-title">책 제목: {item.title}</div>
-					<div className="item-rental-date">대여 일자: {current_string}</div>
+					<div className="item-rental-date">
+						대여 일자: {current_string.replace('T', ' / ').replace('Z', '')}
+					</div>
 					<div className="item-return-date">반납 일자: {return_string}</div>
 				</div>
 			</div>
