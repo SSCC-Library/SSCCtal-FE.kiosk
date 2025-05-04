@@ -7,6 +7,10 @@ import { qrScanStart } from '@/api/qr_api';
 import { manual_input_id } from '@/api/manual_input_api';
 import { use_user } from '@/hooks/use_user';
 import InputField from '@/components/input_field';
+import { INFO_MESSAGES } from '@/constants/messages';
+import AlertModal from '@/components/alert_modal';
+import { PageContainer } from '@/components/page_container';
+import { format_message } from '@/utils/format_message';
 
 function QRForm() {
 	const navigate = useNavigate();
@@ -17,6 +21,8 @@ function QRForm() {
 	const location = useLocation();
 	const { mode } = location.state || {};
 	const user = use_user();
+	const [is_open, set_is_open] = useState(false);
+	const [message, set_message] = useState('');
 
 	//const mode = 'rental';
 
@@ -30,8 +36,8 @@ function QRForm() {
 			//set_is_camera_on(true);
 			const res = { success: false };
 			if (res.success === false) {
-				alert('QR 인식이 실패하였습니다. ISBN을 직접 입력해주세요');
-				set_is_id_input(true);
+				set_message(format_message('QR 인식이 실패하였습니다.\n ISBN을 직접 입력해주세요'));
+				set_is_open(true);
 			} else if (res.success === true) {
 				handle_item_flow(res);
 			}
@@ -117,6 +123,15 @@ function QRForm() {
 					홈으로
 				</Button>
 			</div>
+			{is_open && (
+				<AlertModal
+					message={message}
+					on_close={() => {
+						set_is_id_input(true);
+						set_is_open(false);
+					}}
+				/>
+			)}
 			{is_id_input && (
 				<>
 					<div className="manual-input-overlay"></div>
