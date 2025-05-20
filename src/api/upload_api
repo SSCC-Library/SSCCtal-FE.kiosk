@@ -1,0 +1,17 @@
+// src/api/upload_api.js
+import axios from 'axios';
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
+export async function upload_signature(file, name, student_id) {
+	const form_data = new FormData();
+	form_data.append('file', file); // key 이름은 서버와 일치시킬 것
+	form_data.append('name', name);
+	form_data.append('student_id', student_id);
+
+	const response = await axios.post(`${BACKEND_URL}/api/v0/upload/signature/image`, form_data, {
+		headers: {
+			'Content-Type': 'multipart/form-data',
+		},
+	});
+	return response.data;
+}
