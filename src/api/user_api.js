@@ -1,5 +1,5 @@
 /*
-	학번, 비밀번호 입력 후 서버로 전송하는 로그인 API
+학번, 비밀번호 입력 후 서버로 전송하는 로그인 API
 */
 import axios from 'axios';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;

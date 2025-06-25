@@ -1,5 +1,5 @@
 /*
-	QR 인식 오류 시 직접 입력한 ISBN 보내는 API
+QR 인식 오류 시 직접 입력한 ISBN 보내는 API
 */
 
 import axios from 'axios';
