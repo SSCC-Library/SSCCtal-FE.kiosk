@@ -36,11 +36,11 @@ function InfoPage() {
 					{mode === 'return' && (
 						<>
 							<div className="item-rental-date">
-								{/* 대여 일자: {current_string.replace('T', ' / ').replace('Z', '')} */}
-								대여 일자: {item.rental_date.replace('T', ' / ').replace('Z', '')}
+								대여 일자: {current_string.replace('T', ' / ').replace('Z', '')}
+								{/* 대여 일자: {item.rental_date.replace('T', ' / ').replace('Z', '')} */}
+								{/* 반납 시 대여일자는 기존 대여 일자가 표시되어야 함 */}
 							</div>
 							<div className="item-return-date">
-								{/* 반납 일자: {return_string} */}
 								반납 일자: {current_string.replace('T', ' / ').replace('Z', '')}
 							</div>
 						</>
