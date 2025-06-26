@@ -1,6 +1,11 @@
+/*
+모든 페이지의 기본 틀이 되는
+컨테이너 컴포넌트
+*/
+
 import './page_container.css';
 
-export function PageContainer({ children, title, title_color }) {
+export function PageContainer({ title, title_color, children }) {
 	return (
 		<div className="page-container">
 			{title && (
