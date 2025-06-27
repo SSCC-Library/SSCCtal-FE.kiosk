@@ -1,80 +1,103 @@
+/*
+로그인 폼
+- 학번/비밀번호 입력 받은 후, 서버로 로그인 요청
+- 로그인 3회 실패 시 60초간 입력 잠금(use_login_limiter)
+- 요청 중 중복 클릭 불가(loading)
+*/
+
 import React, { useState, useEffect } from 'react';
-import { ERROR_MESSAGES, INFO_MESSAGES } from '@/constants/messages';
-import Message from '@/components/message';
-import { format_message } from '@/utils/format_message';
-import InputField from '@/components/input_field';
+import { useNavigate } from 'react-router-dom';
+import { login } from '@/api/login_api';
 import Button from '@/components/button';
+import InputField from '@/components/input_field';
+import Message from '@/components/message';
+import { ERROR_MESSAGES, INFO_MESSAGES } from '@/constants/messages';
 import { use_login_limiter } from '@/hooks/use_login_limiter';
+import { format_message } from '@/utils/format_message';
 import './login.css';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { login } from '@/api/user_api';
-import AlertModal from '@/components/alert_modal';
 
 function LoginForm() {
 	const navigate = useNavigate();
 	const [user_id, set_user_id] = useState('');
 	const [pwd, set_pwd] = useState('');
-	const [message, set_message] = useState('');
-	const [is_open, set_is_open] = useState(false);
 	const [error, set_error] = useState('');
-	const {
-		is_locked,
-		check,
-		add_attempt,
-		lock_temporarily,
-		remaining_time,
-		attempts,
-		set_attempts,
-	} = use_login_limiter();
-	const location = useLocation();
-	const redirect_message = location?.state?.message || '';
+	const [loading, set_loading] = useState(false);
+	const { is_locked, check, add_attempt, lock_temporarily, remaining_time, attempts } =
+		use_login_limiter();
 
+	//잠금 해제 시 에러 메세지 자동 삭제
 	useEffect(() => {
-		if (redirect_message) {
-			set_message(redirect_message);
-			set_is_open(true);
+		if (!is_locked) {
+			set_error(null);
 		}
-	}, [redirect_message]);
+	}, [is_locked]);
 
+	//로그인 요청
 	const handle_submit = async (e) => {
 		e.preventDefault();
-		set_error(null);
-		set_message('');
 
-		if (is_locked) {
-			return;
-		}
+		//잠금, 로딩 중 중복 처리 막음
+		if (is_locked || loading) return;
+		set_loading(true);
+		set_error(null);
+
 		try {
 			const res = await login(user_id, pwd);
+			console.log(res);
 
 			if (res.success) {
 				localStorage.setItem('user', JSON.stringify(res));
 				navigate('/main');
 			} else {
 				if (res.code === 400) {
+					//학번, 비밀번호 오류
+					set_error(
+						format_message(ERROR_MESSAGES.invalid_login, {
+							count: 3 - attempts,
+						})
+					);
 					add_attempt();
-
 					if (check()) {
 						lock_temporarily();
+						set_loading(false);
 						return;
 					}
-					const err_msg = format_message(ERROR_MESSAGES.invalid_login, {
-						count: 3 - attempts,
-					});
-					set_error(err_msg);
+					set_loading(false);
 					return;
 				} else if (res.code === 401) {
+					//학번 없음
 					set_error(ERROR_MESSAGES.user_not_found);
 				} else {
+					//알 수 없는 오류
 					set_error(ERROR_MESSAGES.unknown);
 				}
+				set_loading(false);
 			}
 		} catch (err) {
-			set_message(format_message('서버 연결 실패\n' + INFO_MESSAGES.alert_admin));
-			set_is_open(true);
+			//입력값 형식 오류
+			if (err.code === 422) {
+				set_error(
+					format_message(ERROR_MESSAGES.invalid_syntax, {
+						count: 3 - attempts,
+					})
+				);
+				add_attempt();
+				if (check()) {
+					lock_temporarily();
+					set_loading(false);
+					return;
+				}
+				set_loading(false);
+				return;
+			} else {
+				set_error(err.message);
+				set_loading(false);
+			}
 		}
+		set_loading(false);
 	};
 
+	//잠금 상태/남은 시간 메세지
 	const render_lock_message = () => {
 		if (!is_locked || !remaining_time) return null;
 
@@ -101,7 +124,7 @@ function LoginForm() {
 					placeholder="비밀번호 입력"
 				/>
 			</div>
-			<Button type="submit" class_name="default-button" disabled={is_locked}>
+			<Button type="submit" class_name="default-button" disabled={is_locked || loading}>
 				로그인
 			</Button>
 			<Message type="error" text={error} class_name="error" />
