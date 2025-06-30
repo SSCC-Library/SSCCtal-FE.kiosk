@@ -1,18 +1,23 @@
+/*
+info 폼
+- 서버로 대여/반납 정보 전송, 성공/실패에 따라 라우팅
+- qr코드 재인식, 홈 이동 처리
+*/
+
 import React from 'react';
-import Button from '@/components/button';
-import './info.css';
 import { useNavigate } from 'react-router-dom';
-import { result } from '@/api/result_api';
+import { send_result } from '@/api/send_result_api';
+import Button from '@/components/button';
 import { use_user } from '@/hooks/use_user';
+import './info.css';
 
 function InfoForm({ item, mode, current_date, return_date }) {
 	const navigate = useNavigate();
 	const user = use_user();
 
 	const handle_item = async () => {
-		//navigate('/result/success', { state: { mode } });
 		try {
-			const res = await result(
+			const res = await send_result(
 				user.student_id,
 				item.item_id,
 				current_date,
