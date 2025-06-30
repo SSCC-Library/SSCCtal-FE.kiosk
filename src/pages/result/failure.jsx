@@ -1,13 +1,17 @@
-import Button from '@/components/button';
-import './failure.css';
+/*
+failure 페이지
+- 대여/반납 실패 시 상태에 따라 실패 메시지/타이틀 분기
+*/
+
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import failureImg from '@/assets/failure.png';
-import Message from '@/components/message';
-import { useState, useEffect } from 'react';
-import { INFO_MESSAGES, ERROR_MESSAGES } from '@/constants/messages';
 import AlertModal from '@/components/alert_modal';
+import Button from '@/components/button';
 import { PageContainer } from '@/components/page_container';
+import { INFO_MESSAGES, ERROR_MESSAGES } from '@/constants/messages';
 import { format_message } from '@/utils/format_message';
+import './failure.css';
 
 function FailurePage() {
 	const navigate = useNavigate();
@@ -16,9 +20,8 @@ function FailurePage() {
 	const { mode, state } = location.state || {};
 	const [is_open, set_is_open] = useState(false);
 	const [message, set_message] = useState('');
-	// const mode = '대여';
-	// const state = 'is_rental';
 
+	//페이지 진입 시 에러 메세지 세팅
 	useEffect(() => {
 		set_error(ERROR_MESSAGES[state]);
 	}, []);
