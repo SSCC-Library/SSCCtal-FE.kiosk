@@ -1,3 +1,9 @@
+/*
+줄바꿈을 위한 유틸 함수
+- 탬플릿 문자열의 key를 values 객체의 값으로 치환
+- \n 을 <br/>로 변환하여 줄바꿈 적용
+*/
+
 import React from 'react';
 
 export function format_message(template, values = {}) {

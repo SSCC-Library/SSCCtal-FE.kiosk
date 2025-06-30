@@ -1,3 +1,9 @@
+/*
+로그인 시도 횟수 제한 훅
+최대 3회 시도 후 실패 시 60초 동안 로그인 제한
+limit, duration 파라미터로 설정 가능(기본값: 3회, 60초)
+*/
+
 import { useState } from 'react';
 
 export function use_login_limiter(limit = 3, duration = 60000) {
@@ -13,7 +19,7 @@ export function use_login_limiter(limit = 3, duration = 60000) {
 		const elapsed = now - first_time;
 
 		if (elapsed < duration && attempts > limit - 1) {
-			return true;
+			return true; // 제한 중
 		}
 
 		if (elapsed >= duration) {

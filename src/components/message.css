@@ -7,12 +7,6 @@
 	font-weight: 500;
 }
 
-.message.result {
-	top: 59vh;
-	font-size: 2em;
-	color: rgb(99, 99, 99);
-}
-
 .message.error {
 	top: 30vh;
 	color: red;

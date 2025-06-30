@@ -1,5 +1,10 @@
+/*
+메세지를 상수 컴포넌트로 정리
+*/
+
 export const ERROR_MESSAGES = {
 	invalid_login: '학번 혹은 비밀번호를 잘못 입력하였습니다. \n{count}번 남았습니다.',
+	invalid_syntax: '학번은 숫자로 입력해주세요. \n{count}번 남았습니다.',
 	login_fail: '로그인 요청 실패',
 	user_not_found: 'SSCC 회원이 아닙니다',
 	over_rental: '대여 가능 개수를 초과하였습니다',

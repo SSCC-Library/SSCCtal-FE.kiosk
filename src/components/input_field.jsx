@@ -1,6 +1,10 @@
+/*
+학번, 비밀번호, ISBN을 입력하는 컴포넌트
+*/
+
 import './input_field.css';
 
-function InputField({ type = 'text', value, onChange, placeholder }) {
+function InputField({ type, value, onChange, placeholder }) {
 	return (
 		<input
 			type={type}

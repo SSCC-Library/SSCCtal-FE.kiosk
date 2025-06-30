@@ -1,78 +1,36 @@
-import React, { useState, useRef } from 'react';
+/*
+qr 폼
+- QR 코드 인식(카메라), ISBN 수동 입력 모두 지원
+- WebSoket으로 실시간 QR 인식
+*/
+
+import React, { useState } from 'react';
 import Button from '@/components/button';
 import './qrscan.css';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { manual_input_id } from '../../api/manual_input_api';
 import VideoStream from '@/components/video_stream';
 import InputField from '@/components/input_field';
 import AlertModal from '@/components/alert_modal';
+import use_ws_qrscan from '@/hooks/use_ws_qrscan';
+import { format_message } from '@/utils/format_message';
 
 function QRForm() {
 	const navigate = useNavigate();
 	const location = useLocation();
 	const { mode } = location.state || {};
 
-	// 상태
-	const [is_camera_on, set_is_camera_on] = useState(false); // 영상 표시
-	const [is_connecting, set_is_connecting] = useState(false); // ws 연결 시도 중
-	const [is_connected, set_is_connected] = useState(false); // ws 연결 완료
+	// status로 qr 화면 관리
+	const [status, set_status] = useState('default'); //default | connecting | connected | error
 	const [is_id_input, set_is_id_input] = useState(false);
 	const [manual_id, set_manual_id] = useState('');
-	const [is_open, set_is_open] = useState(false);
 	const [message, set_message] = useState('');
-
-	const wsRef = useRef(null);
-
-	// "촬영 시작" 버튼 누르면
-	const handle_qr_scan = () => {
-		set_is_connecting(true);
-		set_is_camera_on(false); // 혹시 모를 이전 영상 OFF
-
-		// ws 이미 연결되어 있으면 닫고 새로 연결
-		if (wsRef.current && wsRef.current.readyState === 1) {
-			wsRef.current.close();
-		}
-
-		wsRef.current = new window.WebSocket('ws://prototype.sscctal.com/api/v0/ws/video');
-		wsRef.current.onopen = () => {
-			set_is_connecting(false);
-			set_is_connected(true);
-			set_is_camera_on(true);
-			// 연결 완료되면 start 명령 바로 전송
-			wsRef.current.send(JSON.stringify({ cmd: 'start' }));
-		};
-		wsRef.current.onmessage = (event) => {
-			const res = JSON.parse(event.data);
-			if (res && res.title) {
-				// 책 정보 온 거 처리
-				handle_item_flow(res);
-			}
-		};
-		wsRef.current.onerror = () => {
-			set_message('서버 연결 오류. 다시 시도해라.');
-			set_is_open(true);
-			set_is_connecting(false);
-			set_is_connected(false);
-			set_is_camera_on(false);
-		};
-		wsRef.current.onclose = () => {
-			set_is_connecting(false);
-			set_is_connected(false);
-			set_is_camera_on(false);
-		};
-	};
 
 	// 책 정보 오면 처리
 	const handle_item_flow = (res) => {
-		set_is_camera_on(false);
-		set_is_connecting(false);
-		set_is_connected(false);
-
-		if (wsRef.current) {
-			wsRef.current.close();
-		}
-
+		set_status('default');
 		if (mode === 'rental') {
-			if (res.status === 'available') {
+			if (res.status_detail === 'available') {
 				localStorage.setItem('item', JSON.stringify(res));
 				navigate('/info', { state: { mode } });
 			} else {
@@ -81,7 +39,7 @@ function QRForm() {
 				});
 			}
 		} else {
-			if (res.status === 'available') {
+			if (res.status_detail === 'available') {
 				navigate('/result/failure', { state: { mode, state: 'is_return' } });
 			} else {
 				localStorage.setItem('item', JSON.stringify(res));
@@ -90,12 +48,59 @@ function QRForm() {
 		}
 	};
 
+	//ws 훅
+	const { send_command } = use_ws_qrscan({
+		on_open: () => {
+			set_status('connected');
+			send_command({ cmd: 'start' });
+		},
+		on_message: (res) => {
+			if (res) {
+				handle_item_flow(res);
+			}
+		},
+		on_error: () => {
+			set_message('서버 연결 오류');
+			set_status('error');
+		},
+		on_close: () => {
+			set_status('default');
+		},
+	});
+
+	//촬영 시작 버튼
+	const handle_qr_scan = () => {
+		set_status('connecting');
+	};
+
+	//직접 입력 처리
+	const handle_manual_input = async (e) => {
+		if (!manual_id.trim()) {
+			set_message('ISBN을 입력하세요.');
+			set_status('error');
+			return;
+		}
+		try {
+			const res = await manual_input_id(manual_id);
+			if (!res) {
+				set_message('책 정보가 없습니다.');
+				set_status('error');
+				return;
+			}
+			handle_item_flow(res);
+		} catch (e) {
+			set_message(format_message('오류가 발생하였습니다.\n ISBN을 다시 입력해주세요'));
+			set_status('error');
+			return;
+		}
+	};
+
 	return (
 		<div className="qrscan-content">
 			<div className="video-container">
-				{is_camera_on ? (
+				{status === 'connected' ? (
 					<VideoStream />
-				) : is_connecting ? (
+				) : status === 'connecting' ? (
 					<div className="video-placeholder">카메라 연결 중...</div>
 				) : (
 					<div className="video-placeholder">카메라 대기 중...</div>
@@ -105,20 +110,20 @@ function QRForm() {
 				<Button
 					onClick={handle_qr_scan}
 					class_name="default-button"
-					disabled={is_connecting || is_camera_on}
+					disabled={status === 'connected' || status === 'connecting'}
 				>
-					{is_connecting ? '연결 중...' : '촬영 시작'}
+					{status === 'connecting' ? '연결 중...' : '촬영 시작'}
 				</Button>
 				<Button onClick={() => navigate('/main')} class_name="default-button">
 					홈으로
 				</Button>
 			</div>
-			{is_open && (
+			{status === 'error' && (
 				<AlertModal
 					message={message}
 					on_close={() => {
 						set_is_id_input(true);
-						set_is_open(false);
+						set_status('default');
 					}}
 				/>
 			)}
@@ -136,7 +141,7 @@ function QRForm() {
 							onChange={(e) => set_manual_id(e.target.value)}
 						/>
 						<div className="button-group">
-							<Button onClick={() => {}} class_name="mini-button">
+							<Button onClick={handle_manual_input} class_name="mini-button">
 								확인
 							</Button>
 							<Button onClick={() => navigate('/main')} class_name="mini-button">

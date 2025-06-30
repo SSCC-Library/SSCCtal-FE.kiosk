@@ -6,6 +6,10 @@
 	border-radius: 0.7em;
 	padding: 0 1em;
 	font-size: 3em;
+
+	transition:
+		border-color 0.3s,
+		box-shadow 0.3s;
 }
 
 .input-field::placeholder {

@@ -1,3 +1,8 @@
+/*
+QR 페이지
+안내 문구와 스타일 포함, 전체 레이아웃 컨테이너 역할
+*/
+
 import QRForm from './qr_form';
 import './qrscan.css';
 import { PageContainer } from '@/components/page_container';

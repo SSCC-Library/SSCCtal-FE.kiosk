@@ -1,8 +1,13 @@
-import Button from '@/components/button';
-import './success.css';
+/*
+success 페이지
+- 대여/반납 성공 시 상태에 따라 성공 메시지/타이틀 분기
+*/
+
 import { useNavigate, useLocation } from 'react-router-dom';
 import successImg from '@/assets/success.png';
+import Button from '@/components/button';
 import { PageContainer } from '@/components/page_container';
+import './success.css';
 
 function SuccessPage() {
 	const navigate = useNavigate();

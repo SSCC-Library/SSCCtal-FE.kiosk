@@ -1,9 +1,17 @@
+/*
+info 페이지
+- 대여/반납 플로우 분기 렌더링
+- 날짜 정보 불러옴 (use_get_date)
+- InfoForm에서 실제 대여/반납 서버 전송 처리
+*/
+
 import InfoForm from './info_form';
-import './info.css';
 import { useLocation } from 'react-router-dom';
-import { use_get_date } from '@/hooks/use_get_date';
 import default_image from '@/assets/default_book.png';
 import { PageContainer } from '@/components/page_container';
+import { use_get_date } from '@/hooks/use_get_date';
+import './info.css';
+
 function InfoPage() {
 	const location = useLocation();
 	// const { item, mode } = location.state;
