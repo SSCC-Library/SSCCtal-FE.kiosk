@@ -5,9 +5,10 @@
 - 요청 중 중복 클릭 불가(loading)
 */
 
+import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { login } from '@/api/login_api';
+import { login } from '@/api/auth_api';
 import Button from '@/components/button';
 import InputField from '@/components/input_field';
 import Message from '@/components/message';
@@ -46,7 +47,12 @@ function LoginForm() {
 			console.log(res);
 
 			if (res.success) {
-				localStorage.setItem('user', JSON.stringify(res));
+				const token = res.data.token;
+				if (token) {
+					localStorage.setItem('token', token);
+					axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+				} else set_error(ERROR_MESSAGES.token_not_find);
+				localStorage.setItem('user', JSON.stringify(res.data.name));
 				navigate('/main');
 			} else {
 				if (res.code === 400) {
