@@ -31,7 +31,7 @@ export function use_get_date() {
 			'Z';
 		set_current_string(current);
 
-		const next_date = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
+		const next_date = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
 		const next_str =
 			next_date.getFullYear() +
 			'-' +
