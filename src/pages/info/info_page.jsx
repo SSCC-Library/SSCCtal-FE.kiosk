@@ -18,8 +18,9 @@ function InfoPage() {
 	// const data = item.data;
 
 	const item = JSON.parse(localStorage.getItem('item'));
+	const item_copy = JSON.parse(localStorage.getItem('item_copy'));
 	const { mode } = location.state;
-	const { current_string, return_string } = use_get_date();
+	const { current_string, next_string } = use_get_date();
 
 	return (
 		<PageContainer
@@ -28,39 +29,34 @@ function InfoPage() {
 		>
 			<div className="item-container">
 				<div className="item-picture">
-					<img src={item.img || default_image} />
+					<img src={item.image_url || default_image} />
 				</div>
 
 				<div className="item-info">
-					<div className="item-title">책 제목: {item.title}</div>
+					<div className="item-title">책 제목: {item.name}</div>
 					{mode === 'rental' && (
 						<>
 							<div className="item-rental-date">
 								대여 일자: {current_string.replace('T', ' / ').replace('Z', '')}
 							</div>
-							<div className="item-return-date">반납 예정 일자: {return_string}</div>
+							<div className="item-return-date">반납 예정 일자: {next_string}</div>
 						</>
 					)}
 					{mode === 'return' && (
 						<>
 							<div className="item-rental-date">
-								대여 일자: {current_string.replace('T', ' / ').replace('Z', '')}
+								{/* 대여 일자: {current_string.replace('T', ' / ').replace('Z', '')} */}
 								{/* 대여 일자: {item.rental_date.replace('T', ' / ').replace('Z', '')} */}
 								{/* 반납 시 대여일자는 기존 대여 일자가 표시되어야 함 */}
 							</div>
 							<div className="item-return-date">
-								반납 일자: {current_string.replace('T', ' / ').replace('Z', '')}
+								{/* 반납 일자: {current_string.replace('T', ' / ').replace('Z', '')} */}
 							</div>
 						</>
 					)}
 				</div>
 			</div>
-			<InfoForm
-				item={item}
-				mode={mode}
-				current_date={current_string}
-				return_date={return_string}
-			/>
+			<InfoForm item_copy={item_copy} mode={mode} />
 		</PageContainer>
 	);
 }

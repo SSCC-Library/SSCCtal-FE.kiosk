@@ -11,19 +11,13 @@ import Button from '@/components/button';
 import { use_user } from '@/hooks/use_user';
 import './info.css';
 
-function InfoForm({ item, mode, current_date, return_date }) {
+function InfoForm({ item_copy, mode }) {
 	const navigate = useNavigate();
 	const user = use_user();
 
 	const handle_item = async () => {
 		try {
-			const res = await send_result(
-				user.student_id,
-				item.item_id,
-				current_date,
-				return_date,
-				mode
-			);
+			const res = await send_result(item_copy.identifier_code, mode);
 
 			if (res.success) navigate('/result/success', { state: { mode } });
 			else if (!res.success && mode === 'return')
