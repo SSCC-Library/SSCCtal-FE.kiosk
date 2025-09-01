@@ -8,6 +8,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import failureImg from '@/assets/failure.png';
 import AlertModal from '@/components/alert_modal';
 import Button from '@/components/button';
+import Message from '@/components/message';
 import { PageContainer } from '@/components/page_container';
 import { INFO_MESSAGES, ERROR_MESSAGES } from '@/constants/messages';
 import { format_message } from '@/utils/format_message';
@@ -30,7 +31,7 @@ function FailurePage() {
 		<PageContainer title={mode === 'rental' ? '대여 실패' : '반납 실패'} title_color="#2e5bff">
 			<div className="failure-content">
 				<img src={failureImg} alt="실패 이미지" className="failure-image" />
-				<Message type="message" text={error} class_name="result" />
+				<Message type="message" text={error} class_name="failure" />
 				<Button onClick={() => navigate('/main')} class_name="default-button">
 					확인
 				</Button>
