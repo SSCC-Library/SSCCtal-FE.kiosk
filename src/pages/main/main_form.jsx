@@ -5,11 +5,26 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { logout } from '@/api/auth_api';
 import Button from '@/components/button';
 import './main.css';
 
 function MainForm() {
 	const navigate = useNavigate();
+
+	const handle_logout = async () => {
+		try {
+			const res = await logout();
+			console.log(res);
+		} catch (err) {
+			console.error('로그아웃 API 호출 실패:', err);
+		}
+		localStorage.removeItem('token');
+		localStorage.removeItem('user');
+		localStorage.removeItem('item');
+		localStorage.removeItem('item_copy');
+		navigate('/');
+	};
 
 	return (
 		<div className="main-button-wrapper">
@@ -27,7 +42,7 @@ function MainForm() {
 					반납
 				</Button>
 			</div>
-			<Button onClick={() => navigate('/')} class_name="default-button">
+			<Button onClick={handle_logout} class_name="default-button">
 				로그아웃
 			</Button>
 		</div>
