@@ -6,14 +6,14 @@ ReactDOM에서 루트에 렌더링(앱 진입점)
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
-import Main from './main';
+import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
 	<React.StrictMode>
 		<HashRouter>
-			<Main />
+			<App />
 		</HashRouter>
 	</React.StrictMode>
 );
