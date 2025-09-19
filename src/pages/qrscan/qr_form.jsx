@@ -135,7 +135,7 @@ function QRForm() {
 		<div className="qrscan-content">
 			<div className="video-container">
 				{/* 실시간 스트림 캔버스 */}
-				<StreamViewer url={STREAM_URL} width={320} height={240} />
+				<StreamViewer url={STREAM_URL} width={450} height={380} />
 				{/* 상태 텍스트 (네 기존 플레이스홀더 대체) */}
 				{status === 'connecting' ? (
 					<div className="video-placeholder">카메라 연결 중...</div>
