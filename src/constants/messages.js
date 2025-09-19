@@ -1,6 +1,7 @@
 /*
 메세지를 상수 컴포넌트로 정리
 */
+const ADMIN_NUMBER = import.meta.env.VITE_ADMIN_NUMBER;
 
 export const ERROR_MESSAGES = {
 	invalid_login: '학번 혹은 비밀번호를 잘못 입력하였습니다. \n{count}번 남았습니다.',
@@ -23,5 +24,5 @@ export const SUCCESS_MESSAGES = {
 export const INFO_MESSAGES = {
 	redirecting: '10초 후 자동으로 이동합니다.',
 	too_many_attempts: '로그인 시도 횟수를 초과했습니다. \n{time}초 후 다시 시도하세요.',
-	alert_admin: '관리자에게 문의하세요\n010-0000-0000',
+	alert_admin: `관리자에게 문의하세요\n${ADMIN_NUMBER}`,
 };
