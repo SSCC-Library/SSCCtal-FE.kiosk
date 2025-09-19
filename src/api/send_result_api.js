@@ -6,13 +6,10 @@
 
 import axios from 'axios';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-const ADMIN_TOKEN = localStorage.getItem('token');
 
-const AUTH_HEADER = {
-	headers: {
-		Authorization: `Bearer ${ADMIN_TOKEN}`,
-	},
-};
+const AUTH_HEADER = () => ({
+	headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+});
 
 export const send_result = async (identifier_code, mode) => {
 	const url = mode === 'rental' ? '/api/v1/kiosk/rent' : '/api/v1/kiosk/return';
