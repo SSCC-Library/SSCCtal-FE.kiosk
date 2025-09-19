@@ -14,7 +14,7 @@ function App() {
 			timeout_id = setTimeout(() => {
 				localStorage.clear(); // 로그인 정보 제거
 				navigate('/black');
-			}, 60_000); // 1분
+			}, 120_000); // 2분
 		};
 
 		const handle_input = () => {
